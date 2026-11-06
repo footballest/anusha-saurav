@@ -307,10 +307,10 @@ fieldset .field-error { margin-bottom: 0; }
 .thanks-summary { font-family: var(--font-caps); font-size: .78rem; letter-spacing: .12em; color: var(--label); margin-bottom: 16px !important; }
 
 /* ---------- gallery ---------- */
-.gallery-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0 0 16px; }
+.gallery-tabs { display: flex; justify-content: center; gap: 6px; margin: 0 0 16px; }
 .gallery-tabs [role="tab"] {
-  min-height: 44px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
-  font-family: var(--font-caps); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  flex: 0 1 auto; min-height: 44px; padding: 6px 10px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-caps); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
   color: var(--title); background: transparent; border: 1px solid var(--line);
 }
 .gallery-tabs [aria-selected="true"] { background: var(--btn); color: var(--btn-ink); border-color: var(--btn); }
