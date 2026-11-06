@@ -341,7 +341,7 @@ function that he runs once to create everything below.
    `couple_short`, `gallery_enabled` (FALSE), `rsvp_open` (TRUE), `music_enabled`
    (TRUE), `show_addresses` (FALSE), `notify_email_on_rsvp` (TRUE), `rsvp_whatsapp` (number for the WhatsApp fallback; Saurav),
    `reception_intro`, `reception_greeting`, `full_intro`, `sharing_the_happiness`.
-2. **Events** — id | name_en | name_ml | date_label | start_iso | end_iso | venue |
+2. **Events** — id | name_en | name_ml | date_label | time_label | start_iso | end_iso | venue |
    address | maps_url | variants (`full` or `full,reception`) | order
 3. **Contacts** — name | relation | phone_e164 | whatsapp (TRUE/FALSE) | order | visible
 4. **Families** — key | text (bride_parents, bride_house,
@@ -367,11 +367,15 @@ Anusha-Saurav Wedding/
 ```
 
 ### Web app endpoints (Deploy → Web app, Execute as: Me, Who has access: Anyone)
-- `GET ?action=config` → `{settings, events, contacts, families}` from the public tabs
-  only. Cache with `CacheService` for 5 minutes; a menu item "Refresh site cache"
-  clears it.
-- `GET ?action=gallery` → `{ "Save the Date": [{id, name, w, h}], "Wedding": [...],
-  "Reception": [...] }` listing files in the Approved subfolders. The site shows images
+- `GET ?action=config&variant=full|reception` → `{settings, events, contacts, families}`
+  from the public tabs only. *Decision (7 Nov 2026):* with `variant=reception` only
+  reception events are returned, and the site caches each version separately. Cache with
+  `CacheService` for 5 minutes (per variant); a menu item "Refresh site cache" clears it,
+  and editing a public tab clears it too (`onEdit`).
+- `GET ?action=gallery` → `{ "Save the Date": [{id}], "Wedding": [...],
+  "Reception": [...] }` listing files in the Approved subfolders, sorted by file name.
+  *Decision (7 Nov 2026):* only ids are returned. File names carry the uploader's name,
+  and the square grid doesn't need w/h. The site shows images
   via `https://drive.google.com/thumbnail?id=<ID>&sz=w1200` (and `sz=w400` for grids).
   Test this works; if Google blocks hotlinking, fall back to
   `https://lh3.googleusercontent.com/d/<ID>=w1200`.
@@ -382,6 +386,10 @@ Anusha-Saurav Wedding/
   `image/jpeg|png|webp|heic`; max 10 files per request; save to **Pending uploads** as
   `<date>_<uploader>_<original>`; log to Uploads tab.
 - Always return JSON via `ContentService` with `{ok:true}` / `{ok:false,error}`.
+  Error codes the site relies on: `bad_passcode` (upload page asks again), `closed`.
+  20 wrong passcodes within 10 minutes pause uploads (`too_many_attempts`).
+- RSVP rows store `Accept/Decline` and `Yes/No`; guest-typed text is written with a
+  leading apostrophe, so Sheets never treats it as a formula or number.
 - Never return the RSVP, Summary or Uploads tabs, the passcode, or folder IDs.
 
 Add a custom menu in the Sheet: **Wedding site → Refresh site cache / Rebuild summary /
