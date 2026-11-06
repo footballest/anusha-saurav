@@ -4,7 +4,9 @@
 (function () {
   "use strict";
 
-  var CACHE_KEY = "as-config-v1";
+  // One cache per version of the site: the reception page only ever receives reception events.
+  var CACHE_KEY = "as-config-v2-" + (window.VARIANT || "full");
+  try { localStorage.removeItem("as-config-v1"); } catch (e) { /* old shared cache */ }
 
   function readCache() {
     try { return JSON.parse(localStorage.getItem(CACHE_KEY)); } catch (e) { return null; }
@@ -37,15 +39,23 @@
     return out;
   }
 
-  // Normalise types (the Sheet sends strings) and sort.
+  // Normalise types (the Sheet sends everything as text) and sort, so the same content
+  // from the Sheet and from fallback.json comes out identical.
   function normalise(d) {
-    ["gallery_enabled", "rsvp_open", "music_enabled", "show_addresses"].forEach(function (k) {
+    ["gallery_enabled", "rsvp_open", "music_enabled", "show_addresses", "notify_email_on_rsvp"].forEach(function (k) {
       d.settings[k] = toBool(d.settings[k]);
     });
-    d.events.sort(function (a, b) { return Number(a.order) - Number(b.order); });
+    d.events.forEach(function (e) { e.order = Number(e.order) || 0; });
+    d.events.sort(function (a, b) { return a.order - b.order; });
     d.contacts = d.contacts
-      .filter(function (c) { return toBool(c.visible === undefined ? true : c.visible); })
-      .sort(function (a, b) { return Number(a.order) - Number(b.order); });
+      .map(function (c) {
+        c.order = Number(c.order) || 0;
+        c.whatsapp = toBool(c.whatsapp === undefined ? true : c.whatsapp);
+        c.visible = toBool(c.visible === undefined ? true : c.visible);
+        return c;
+      })
+      .filter(function (c) { return c.visible; })
+      .sort(function (a, b) { return a.order - b.order; });
     return d;
   }
 
@@ -55,7 +65,8 @@
       .then(function (r) { return r.json(); })
       .then(function (fallback) {
         var cached = readCache();
-        onData(normalise(merge(fallback, cached)));
+        var shown = normalise(merge(fallback, cached));
+        onData(shown);
 
         if (!window.API_URL) return;
         var url = window.API_URL + "?action=config&variant=" + encodeURIComponent(window.VARIANT);
@@ -63,9 +74,10 @@
           .then(function (r) { return r.json(); })
           .then(function (api) {
             if (!api || api.ok === false) return;
-            if (JSON.stringify(api) === JSON.stringify(cached)) return; // nothing new
             writeCache(api);
-            onData(normalise(merge(fallback, api)));
+            var fresh = normalise(merge(fallback, api));
+            if (JSON.stringify(fresh) === JSON.stringify(shown)) return; // nothing changed: no re-render
+            onData(fresh);
           })
           .catch(function () { /* offline or API down: keep fallback */ });
       })
