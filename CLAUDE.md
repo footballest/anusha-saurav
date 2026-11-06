@@ -339,7 +339,7 @@ function that he runs once to create everything below.
 ### Sheet tabs
 1. **Settings** (key | value | note) — public via the API. Keys at minimum:
    `couple_short`, `gallery_enabled` (FALSE), `rsvp_open` (TRUE), `music_enabled`
-   (TRUE), `show_addresses` (FALSE), `notify_email_on_rsvp` (TRUE),
+   (TRUE), `show_addresses` (FALSE), `notify_email_on_rsvp` (TRUE), `rsvp_whatsapp` (number for the WhatsApp fallback; Saurav),
    `reception_intro`, `reception_greeting`, `full_intro`, `sharing_the_happiness`.
 2. **Events** — id | name_en | name_ml | date_label | start_iso | end_iso | venue |
    address | maps_url | variants (`full` or `full,reception`) | order

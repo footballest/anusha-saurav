@@ -266,7 +266,8 @@ main:focus { outline: none; }
 .rsvp-form legend, .rsvp-form .field > span:first-child, .rsvp-form label.field {
   font-family: var(--font-caps); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--label);
 }
-.rsvp-form legend { padding: 0; margin-bottom: 4px; }
+.rsvp-form legend { padding: 0; margin-bottom: 4px; line-height: 1.5; }
+.rsvp-form div.field > span:first-child { display: block; line-height: 1.5; }
 .rsvp-form input[type="text"], .rsvp-form input[type="tel"], .rsvp-form textarea {
   display: block; width: 100%; margin-top: 6px;
   font: inherit; font-family: var(--font-body); font-size: 1.08rem; text-transform: none; letter-spacing: 0; color: var(--ink);
@@ -280,7 +281,30 @@ main:focus { outline: none; }
 .stepper .btn { width: 46px; padding: 0; font-size: 1.3rem; letter-spacing: 0; }
 .stepper output { min-width: 2ch; text-align: center; font-size: 1.4rem; font-family: var(--font-caps); color: var(--ink); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.form-note { margin: 10px 0 0; text-align: center; min-height: 1.6em; font-style: italic; }
+.form-note { margin: 10px 0 0; text-align: center; font-style: italic; color: var(--muted); }
+.field-error {
+  margin: 4px 0 14px; font-family: var(--font-body); font-size: 1rem; font-style: italic;
+  letter-spacing: 0; text-transform: none; color: var(--title);
+}
+.field-error::before { content: "✻ "; color: var(--accent); font-style: normal; }
+fieldset .field-error { margin-bottom: 0; }
+.rsvp-form [aria-invalid="true"] { border-color: var(--title); }
+.btn:disabled { opacity: .7; cursor: progress; }
+.rsvp-fallback {
+  margin-top: 16px; padding: 16px; text-align: center;
+  border: 1px dashed var(--line); border-radius: 14px; background: var(--paper);
+}
+.rsvp-fallback p { margin: 0 0 8px; }
+.rsvp-fallback .btn { margin-top: 8px; }
+.rsvp-thanks {
+  padding: 18px 18px 24px; text-align: center;
+  border: 1px solid var(--line); border-radius: 18px; background: var(--paper);
+}
+.rsvp-thanks:focus { outline: none; }
+.rsvp-thanks p { margin: 0 0 6px; }
+.couple-thanks { max-height: min(260px, 36vh); margin-bottom: 4px; }
+.thanks-title { font-family: var(--font-script); font-size: 2.5rem; line-height: 1.15; color: var(--title); }
+.thanks-summary { font-family: var(--font-caps); font-size: .78rem; letter-spacing: .12em; color: var(--label); margin-bottom: 16px !important; }
 
 /* ---------- contacts ---------- */
 .contact-list { list-style: none; margin: 0; padding: 0; }
