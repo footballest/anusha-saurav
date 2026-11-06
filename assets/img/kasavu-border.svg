@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 24" width="48" height="24">
+  <!-- Kasavu band tile: hairline green, thin zari, thick zari with small woven diamonds, thin zari, hairline green -->
+  <rect width="48" height="24" fill="#FFFBF3"/>
+  <rect y="0.6" width="48" height="1" fill="#2F5D3A"/>
+  <rect y="3" width="48" height="1.6" fill="#C49A3A"/>
+  <rect y="6.4" width="48" height="11.2" fill="#C49A3A"/>
+  <rect y="7.4" width="48" height="0.6" fill="#E2C878"/>
+  <rect y="16" width="48" height="0.6" fill="#E2C878"/>
+  <path d="M12 9.2 L15.4 12 L12 14.8 L8.6 12 Z M36 9.2 L39.4 12 L36 14.8 L32.6 12 Z" fill="#F3E2A6"/>
+  <circle cx="12" cy="12" r="1" fill="#C49A3A"/>
+  <circle cx="36" cy="12" r="1" fill="#C49A3A"/>
+  <circle cx="24" cy="12" r="0.9" fill="#F3E2A6"/>
+  <circle cx="0" cy="12" r="0.9" fill="#F3E2A6"/>
+  <circle cx="48" cy="12" r="0.9" fill="#F3E2A6"/>
+  <rect y="19.4" width="48" height="1.6" fill="#C49A3A"/>
+  <rect y="22.4" width="48" height="1" fill="#2F5D3A"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 24" width="200" height="24">
+  <!-- Small title flourish: zari lines with a lotus bud in the middle -->
+  <g fill="none" stroke="#C49A3A" stroke-width="1.2" stroke-linecap="round">
+    <path d="M8 12 H72 M128 12 H192"/>
+    <path d="M40 15.5 H72 M128 15.5 H160" stroke-width=".8" opacity=".7"/>
+  </g>
+  <g fill="#C49A3A">
+    <circle cx="6" cy="12" r="1.6"/><circle cx="194" cy="12" r="1.6"/>
+    <circle cx="80" cy="12" r="1.3"/><circle cx="120" cy="12" r="1.3"/>
+  </g>
+  <g transform="translate(100 13)">
+    <path d="M0 8 C-5 3 -5 -5 0 -11 C5 -5 5 3 0 8 Z" fill="#7A1F2B"/>
+    <path d="M0 8 C-9 6 -14 0 -14 -5 C-8 -5 -3 -1 0 8 Z" fill="#C49A3A"/>
+    <path d="M0 8 C9 6 14 0 14 -5 C8 -5 3 -1 0 8 Z" fill="#C49A3A"/>
+  </g>
+</svg>

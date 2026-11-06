@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 170" width="320" height="170" role="img" aria-label="Illustration of a heritage bungalow under coconut palms">
+  <!-- Staydium Bungalow Resort, morning: tiled-roof heritage bungalow with verandah pillars -->
+  <defs>
+    <linearGradient id="skyM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDF1D6"/><stop offset="1" stop-color="#FFFBF3"/></linearGradient>
+    <g id="palm">
+      <path d="M-4 0 C-2 -40 4 -80 10 -118 L15 -117 C10 -80 5 -40 5 0 Z" fill="#7A5230"/>
+      <g stroke="#5A3A1E" stroke-width="1" opacity=".6"><path d="M-3 -12 H5 M-2 -28 H6 M-1 -44 H7 M1 -60 H8 M3 -76 H10 M5 -92 H12 M7 -106 H14"/></g>
+      <g transform="translate(12 -118)" fill="#2F5D3A">
+        <path d="M0 0 C18 -16 46 -14 64 6 C44 -4 22 -4 0 4 Z"/>
+        <path d="M0 0 C-18 -16 -46 -14 -64 6 C-44 -4 -22 -4 0 4 Z"/>
+        <path d="M0 0 C10 -24 34 -36 56 -30 C34 -24 16 -14 0 2 Z" fill="#3F7A4A"/>
+        <path d="M0 0 C-10 -24 -34 -36 -56 -30 C-34 -24 -16 -14 0 2 Z" fill="#3F7A4A"/>
+        <path d="M0 0 C2 -20 8 -34 14 -42 C10 -28 6 -14 2 2 Z" fill="#4E8A57"/>
+        <path d="M0 2 C16 6 34 22 40 42 C28 26 14 14 0 6 Z"/>
+        <path d="M0 2 C-16 6 -34 22 -40 42 C-28 26 -14 14 0 6 Z"/>
+        <circle cx="-4" cy="6" r="4" fill="#8A6A2A"/><circle cx="4" cy="7" r="4" fill="#A07A30"/><circle cx="0" cy="11" r="3.6" fill="#8A6A2A"/>
+      </g>
+    </g>
+  </defs>
+  <rect width="320" height="170" rx="12" fill="url(#skyM)"/>
+  <circle cx="252" cy="40" r="18" fill="#F2D27A" opacity=".8"/>
+  <!-- bungalow -->
+  <rect x="78" y="86" width="166" height="56" fill="#FFF7E8" stroke="#C9B48A" stroke-width="1"/>
+  <path d="M62 90 L104 54 H218 L260 90 Z" fill="#A9502C"/>
+  <g stroke="#7A2F1A" stroke-width=".8" opacity=".6"><path d="M80 75 H242 M70 84 H252 M92 64 H230"/></g>
+  <path d="M138 54 L161 32 L184 54 Z" fill="#8E3B22"/>
+  <path d="M146 54 L161 40 L176 54 Z" fill="#6A3A18"/>
+  <rect x="62" y="88" width="198" height="5" fill="#5A3216"/>
+  <!-- verandah pillars -->
+  <g fill="#FFFFFF" stroke="#C9B48A" stroke-width="1">
+    <rect x="86" y="93" width="7" height="49"/><rect x="122" y="93" width="7" height="49"/>
+    <rect x="193" y="93" width="7" height="49"/><rect x="229" y="93" width="7" height="49"/>
+  </g>
+  <!-- doors and windows -->
+  <rect x="150" y="104" width="22" height="38" rx="2" fill="#6B3E1F"/>
+  <path d="M161 104 V142" stroke="#C49A3A" stroke-width="1"/>
+  <rect x="100" y="106" width="16" height="20" rx="2" fill="#2F5D3A"/><rect x="206" y="106" width="16" height="20" rx="2" fill="#2F5D3A"/>
+  <path d="M108 106 V126 M214 106 V126" stroke="#9CC193" stroke-width="1"/>
+  <rect x="72" y="142" width="178" height="6" fill="#D9C7A0"/>
+  <!-- ground -->
+  <path d="M0 150 C80 144 240 144 320 150 V170 H0 Z" fill="#8DB57E"/>
+  <path d="M0 158 C90 152 230 152 320 158 V170 H0 Z" fill="#6E9A5E"/>
+  <use href="#palm" transform="translate(34 156) scale(.95)"/>
+  <use href="#palm" transform="translate(290 158) scale(-.8 .8)"/>
+  <ellipse cx="270" cy="150" rx="18" ry="8" fill="#4E8A57"/>
+  <ellipse cx="60" cy="152" rx="16" ry="7" fill="#4E8A57"/>
+</svg>

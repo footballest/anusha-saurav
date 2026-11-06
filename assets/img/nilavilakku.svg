@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 270" width="120" height="270" role="img" aria-label="Brass nilavilakku lamp">
+  <!-- Kerala nilavilakku (brass standing lamp). Flames have class "flame" so the page can light/flicker them. -->
+  <defs>
+    <linearGradient id="brass" x1="0" x2="1">
+      <stop offset="0" stop-color="#7C5617"/>
+      <stop offset=".35" stop-color="#E9CF7E"/>
+      <stop offset=".55" stop-color="#C99B3B"/>
+      <stop offset="1" stop-color="#6E4A12"/>
+    </linearGradient>
+    <linearGradient id="flameg" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#E5531A"/>
+      <stop offset=".45" stop-color="#F7A531"/>
+      <stop offset="1" stop-color="#FFE9A8"/>
+    </linearGradient>
+    <radialGradient id="glowg">
+      <stop offset="0" stop-color="#FFD98A" stop-opacity=".85"/>
+      <stop offset=".5" stop-color="#FFC966" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#FFC966" stop-opacity="0"/>
+    </radialGradient>
+    <path id="fl" d="M0 0 C-5 -3 -5.5 -10 -2.5 -15 C-1.5 -17.5 -0.5 -20 0 -24 C1.5 -19 5 -15 5 -9 C5 -4 3 -1 0 0 Z"/>
+  </defs>
+
+  <ellipse class="glow" cx="60" cy="62" rx="60" ry="42" fill="url(#glowg)"/>
+
+  <!-- finial -->
+  <path d="M60 14 C55 22 53 28 56 33 H64 C67 28 65 22 60 14 Z" fill="url(#brass)"/>
+  <circle cx="60" cy="11" r="3.2" fill="url(#brass)"/>
+  <rect x="55" y="33" width="10" height="4" rx="2" fill="url(#brass)"/>
+  <rect x="57.5" y="37" width="5" height="28" fill="url(#brass)"/>
+  <ellipse cx="60" cy="48" rx="5.5" ry="3" fill="url(#brass)"/>
+
+  <!-- back flames (behind the dish rim) -->
+  <g class="flames">
+    <g transform="translate(22 69)"><use class="flame" href="#fl" fill="url(#flameg)"/></g>
+    <g transform="translate(98 69)"><use class="flame" href="#fl" fill="url(#flameg)"/></g>
+  </g>
+
+  <!-- dish -->
+  <path d="M8 70 C14 92 40 98 60 98 C80 98 106 92 112 70 Z" fill="url(#brass)"/>
+  <ellipse cx="60" cy="70" rx="52" ry="9" fill="#B88A2E"/>
+  <ellipse cx="60" cy="70" rx="47" ry="6.5" fill="#5E3E10" opacity=".55"/>
+  <path d="M8 70 C14 92 40 98 60 98 C80 98 106 92 112 70" fill="none" stroke="#6E4A12" stroke-width="1"/>
+
+  <!-- front flames -->
+  <g class="flames">
+    <g transform="translate(38 76)"><use class="flame" href="#fl" fill="url(#flameg)"/></g>
+    <g transform="translate(60 78.5)"><use class="flame" href="#fl" fill="url(#flameg)"/></g>
+    <g transform="translate(82 76)"><use class="flame" href="#fl" fill="url(#flameg)"/></g>
+  </g>
+
+  <!-- stem with knops -->
+  <rect x="55" y="96" width="10" height="116" fill="url(#brass)"/>
+  <ellipse cx="60" cy="104" rx="11" ry="5" fill="url(#brass)"/>
+  <ellipse cx="60" cy="132" rx="9" ry="7" fill="url(#brass)"/>
+  <rect x="50" y="146" width="20" height="4" rx="2" fill="url(#brass)"/>
+  <ellipse cx="60" cy="172" rx="10" ry="8" fill="url(#brass)"/>
+  <rect x="49" y="190" width="22" height="4" rx="2" fill="url(#brass)"/>
+
+  <!-- base -->
+  <path d="M46 210 H74 C78 228 92 240 104 246 H16 C28 240 42 228 46 210 Z" fill="url(#brass)"/>
+  <ellipse cx="60" cy="210" rx="16" ry="4" fill="#D9B860"/>
+  <rect x="12" y="246" width="96" height="8" rx="3" fill="url(#brass)"/>
+  <rect x="6" y="254" width="108" height="9" rx="3" fill="url(#brass)"/>
+</svg>

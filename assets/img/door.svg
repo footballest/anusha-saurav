@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 650" width="190" height="650" preserveAspectRatio="none">
+  <!-- One leaf of a teak tharavadu door (left). Mirrored in CSS for the right leaf. Generated once. -->
+  <defs>
+    <linearGradient id="teak" x1="0" x2="1"><stop offset="0" stop-color="#5A3216"/><stop offset=".5" stop-color="#76461F"/><stop offset="1" stop-color="#5A3216"/></linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A2811"/><stop offset="1" stop-color="#673B1A"/></linearGradient>
+    <radialGradient id="stud" cx=".35" cy=".35"><stop offset="0" stop-color="#F6E3A1"/><stop offset=".6" stop-color="#C49A3A"/><stop offset="1" stop-color="#7C5617"/></radialGradient>
+    <g id="s"><circle r="5" fill="url(#stud)"/></g>
+  </defs>
+  <rect width="190" height="650" fill="url(#teak)"/>
+  <rect x="3" y="3" width="184" height="644" fill="none" stroke="#3E220E" stroke-width="2"/>
+  <path d="M49 0 Q50 325.0 48 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M113 0 Q115 325.0 110 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M10 0 Q14 325.0 8 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M49 0 Q55 325.0 49 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M154 0 Q153 325.0 155 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M34 0 Q36 325.0 37 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M99 0 Q102 325.0 100 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M19 0 Q22 325.0 20 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M60 0 Q55 325.0 63 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M90 0 Q93 325.0 93 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M132 0 Q137 325.0 131 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M147 0 Q147 325.0 151 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M161 0 Q156 325.0 158 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M46 0 Q51 325.0 45 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M117 0 Q115 325.0 117 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M75 0 Q73 325.0 76 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M110 0 Q115 325.0 111 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <path d="M170 0 Q174 325.0 174 650" stroke="#3E220E" stroke-width=".6" opacity=".25" fill="none"/>
+  <rect x="24" y="36.0" width="142" height="98.0" rx="3" fill="url(#panel)" stroke="#2E1808" stroke-width="1.5"/>
+  <rect x="33" y="45.0" width="124" height="80.0" rx="2" fill="none" stroke="#8A5A2B" stroke-width="1.2" opacity=".7"/>
+  <rect x="24" y="156.0" width="142" height="98.0" rx="3" fill="url(#panel)" stroke="#2E1808" stroke-width="1.5"/>
+  <rect x="33" y="165.0" width="124" height="80.0" rx="2" fill="none" stroke="#8A5A2B" stroke-width="1.2" opacity=".7"/>
+  <g transform="translate(95.0 205.0)" fill="none" stroke="#C49A3A" stroke-width="1.6" opacity=".9"><circle r="22"/><path d="M0 14 C-8 6 -8 -8 0 -16 C8 -8 8 6 0 14 Z M0 14 C-14 10 -20 0 -18 -8 C-10 -6 -4 2 0 14 Z M0 14 C14 10 20 0 18 -8 C10 -6 4 2 0 14 Z"/></g>
+  <rect x="24" y="276.0" width="142" height="98.0" rx="3" fill="url(#panel)" stroke="#2E1808" stroke-width="1.5"/>
+  <rect x="33" y="285.0" width="124" height="80.0" rx="2" fill="none" stroke="#8A5A2B" stroke-width="1.2" opacity=".7"/>
+  <rect x="24" y="396.0" width="142" height="98.0" rx="3" fill="url(#panel)" stroke="#2E1808" stroke-width="1.5"/>
+  <rect x="33" y="405.0" width="124" height="80.0" rx="2" fill="none" stroke="#8A5A2B" stroke-width="1.2" opacity=".7"/>
+  <rect x="24" y="516.0" width="142" height="98.0" rx="3" fill="url(#panel)" stroke="#2E1808" stroke-width="1.5"/>
+  <rect x="33" y="525.0" width="124" height="80.0" rx="2" fill="none" stroke="#8A5A2B" stroke-width="1.2" opacity=".7"/>
+  <use href="#s" x="12" y="25"/>
+  <use href="#s" x="95" y="25"/>
+  <use href="#s" x="178" y="25"/>
+  <use href="#s" x="12" y="145"/>
+  <use href="#s" x="95" y="145"/>
+  <use href="#s" x="178" y="145"/>
+  <use href="#s" x="12" y="265"/>
+  <use href="#s" x="95" y="265"/>
+  <use href="#s" x="178" y="265"/>
+  <use href="#s" x="12" y="385"/>
+  <use href="#s" x="95" y="385"/>
+  <use href="#s" x="178" y="385"/>
+  <use href="#s" x="12" y="505"/>
+  <use href="#s" x="95" y="505"/>
+  <use href="#s" x="178" y="505"/>
+  <use href="#s" x="12" y="625"/>
+  <use href="#s" x="95" y="625"/>
+  <use href="#s" x="178" y="625"/>
+  <circle cx="168" cy="338" r="9" fill="url(#stud)"/>
+  <circle cx="168" cy="356" r="13" fill="none" stroke="#C49A3A" stroke-width="3.5"/>
+  <rect x="184" y="0" width="6" height="650" fill="#3E220E" opacity=".6"/>
+</svg>

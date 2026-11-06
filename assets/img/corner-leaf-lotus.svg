@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- Bottom-left corner piece: two banana leaves with a lotus and a bud. Mirror with CSS for the right corner. -->
+  <defs>
+    <linearGradient id="leafA" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#244A2E"/><stop offset="1" stop-color="#4E8A57"/>
+    </linearGradient>
+    <linearGradient id="leafB" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#2F5D3A"/><stop offset="1" stop-color="#6FA270"/>
+    </linearGradient>
+    <linearGradient id="petal" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#F7D3DA"/><stop offset="1" stop-color="#D9677F"/>
+    </linearGradient>
+  </defs>
+  <!-- tall leaf -->
+  <path d="M6 178 C10 120 34 58 78 8 C86 30 80 60 66 92 C54 120 36 150 16 178 Z" fill="url(#leafA)"/>
+  <path d="M10 176 C26 120 50 64 78 8" fill="none" stroke="#B8D4AE" stroke-width="1.6"/>
+  <g stroke="#9CC193" stroke-width=".8" opacity=".75">
+    <path d="M20 150 L44 132 M26 132 L52 112 M32 114 L58 92 M40 96 L64 74 M48 78 L70 56 M56 60 L74 40 M64 44 L77 28"/>
+  </g>
+  <path d="M60 98 L54 94 M48 120 L41 117" stroke="#FFFBF3" stroke-width="2"/>
+  <!-- wide leaf -->
+  <path d="M2 178 C40 150 100 130 172 128 C160 146 128 160 92 168 C60 175 30 178 2 178 Z" fill="url(#leafB)"/>
+  <path d="M4 177 C60 152 116 136 172 128" fill="none" stroke="#C7DDBD" stroke-width="1.4"/>
+  <g stroke="#B5D3A8" stroke-width=".8" opacity=".75">
+    <path d="M40 166 L58 174 M66 154 L84 168 M92 145 L108 162 M118 138 L132 154 M144 133 L154 145"/>
+  </g>
+  <path d="M120 150 L124 156" stroke="#FFFBF3" stroke-width="2"/>
+  <!-- lotus -->
+  <g transform="translate(58 160)">
+    <path d="M0 0 C-14 -6 -26 -20 -30 -34 C-16 -32 -6 -20 0 0 Z" fill="url(#petal)"/>
+    <path d="M0 0 C14 -6 26 -20 30 -34 C16 -32 6 -20 0 0 Z" fill="url(#petal)"/>
+    <path d="M0 0 C-10 -10 -14 -28 -10 -44 C-2 -36 2 -18 0 0 Z" fill="url(#petal)"/>
+    <path d="M0 0 C10 -10 14 -28 10 -44 C2 -36 -2 -18 0 0 Z" fill="url(#petal)"/>
+    <path d="M0 0 C-6 -14 -6 -36 0 -52 C6 -36 6 -14 0 0 Z" fill="#E68FA3"/>
+    <path d="M0 -6 C-3 -18 -3 -34 0 -46" fill="none" stroke="#C25A72" stroke-width=".8"/>
+    <ellipse cx="0" cy="0" rx="20" ry="4" fill="#2F5D3A"/>
+  </g>
+  <!-- bud on a stem -->
+  <path d="M104 150 C104 136 108 124 114 114" fill="none" stroke="#2F5D3A" stroke-width="2"/>
+  <path d="M114 116 C106 110 106 96 116 88 C124 98 122 110 114 116 Z" fill="#E68FA3"/>
+  <path d="M114 116 C110 108 111 98 116 90" fill="none" stroke="#C25A72" stroke-width=".8"/>
+</svg>

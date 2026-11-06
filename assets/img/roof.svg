@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 170" width="400" height="170" preserveAspectRatio="xMidYMax meet">
+  <!-- Tharavadu roofline: tiled hipped roof, wooden gable (mukhappu) with lattice and finial, carved eave fascia. -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E3B22"/><stop offset="1" stop-color="#B5552F"/></linearGradient>
+    <clipPath id="roofclip"><path d="M-10 140 L96 58 H304 L410 140 Z"/></clipPath>
+    <clipPath id="gableclip"><path d="M150 64 L200 18 L250 64 Z"/></clipPath>
+  </defs>
+  <path d="M-10 140 L96 58 H304 L410 140 Z" fill="url(#tile)"/>
+  <g clip-path="url(#roofclip)" stroke="#7A2F1A" stroke-width="1.1" opacity=".7" fill="none">
+    <path d="M-20 64 H420"/>
+    <path d="M-20 71 H420"/>
+    <path d="M-20 78 H420"/>
+    <path d="M-20 85 H420"/>
+    <path d="M-20 92 H420"/>
+    <path d="M-20 99 H420"/>
+    <path d="M-20 106 H420"/>
+    <path d="M-20 113 H420"/>
+    <path d="M-20 120 H420"/>
+    <path d="M-20 127 H420"/>
+    <path d="M-20 134 H420"/>
+    <path d="M-20 58 L-97 141" stroke-width=".5" opacity=".6"/>
+    <path d="M-8 58 L-81 141" stroke-width=".5" opacity=".6"/>
+    <path d="M4 58 L-65 141" stroke-width=".5" opacity=".6"/>
+    <path d="M16 58 L-48 141" stroke-width=".5" opacity=".6"/>
+    <path d="M28 58 L-32 141" stroke-width=".5" opacity=".6"/>
+    <path d="M40 58 L-16 141" stroke-width=".5" opacity=".6"/>
+    <path d="M52 58 L0 141" stroke-width=".5" opacity=".6"/>
+    <path d="M64 58 L16 141" stroke-width=".5" opacity=".6"/>
+    <path d="M76 58 L33 141" stroke-width=".5" opacity=".6"/>
+    <path d="M88 58 L49 141" stroke-width=".5" opacity=".6"/>
+    <path d="M100 58 L65 141" stroke-width=".5" opacity=".6"/>
+    <path d="M112 58 L81 141" stroke-width=".5" opacity=".6"/>
+    <path d="M124 58 L97 141" stroke-width=".5" opacity=".6"/>
+    <path d="M136 58 L114 141" stroke-width=".5" opacity=".6"/>
+    <path d="M148 58 L130 141" stroke-width=".5" opacity=".6"/>
+    <path d="M160 58 L146 141" stroke-width=".5" opacity=".6"/>
+    <path d="M172 58 L162 141" stroke-width=".5" opacity=".6"/>
+    <path d="M184 58 L178 141" stroke-width=".5" opacity=".6"/>
+    <path d="M196 58 L195 141" stroke-width=".5" opacity=".6"/>
+    <path d="M208 58 L211 141" stroke-width=".5" opacity=".6"/>
+    <path d="M220 58 L227 141" stroke-width=".5" opacity=".6"/>
+    <path d="M232 58 L243 141" stroke-width=".5" opacity=".6"/>
+    <path d="M244 58 L259 141" stroke-width=".5" opacity=".6"/>
+    <path d="M256 58 L276 141" stroke-width=".5" opacity=".6"/>
+    <path d="M268 58 L292 141" stroke-width=".5" opacity=".6"/>
+    <path d="M280 58 L308 141" stroke-width=".5" opacity=".6"/>
+    <path d="M292 58 L324 141" stroke-width=".5" opacity=".6"/>
+    <path d="M304 58 L340 141" stroke-width=".5" opacity=".6"/>
+    <path d="M316 58 L357 141" stroke-width=".5" opacity=".6"/>
+    <path d="M328 58 L373 141" stroke-width=".5" opacity=".6"/>
+    <path d="M340 58 L389 141" stroke-width=".5" opacity=".6"/>
+    <path d="M352 58 L405 141" stroke-width=".5" opacity=".6"/>
+    <path d="M364 58 L421 141" stroke-width=".5" opacity=".6"/>
+    <path d="M376 58 L438 141" stroke-width=".5" opacity=".6"/>
+    <path d="M388 58 L454 141" stroke-width=".5" opacity=".6"/>
+    <path d="M400 58 L470 141" stroke-width=".5" opacity=".6"/>
+    <path d="M412 58 L486 141" stroke-width=".5" opacity=".6"/>
+  </g>
+  <!-- gable roof -->
+  <path d="M136 72 L200 8 L264 72 L252 72 L200 22 L148 72 Z" fill="#7E321C"/>
+  <path d="M150 64 L200 18 L250 64 Z" fill="#6A3A18"/>
+  <g clip-path="url(#gableclip)" stroke="#C49A3A" stroke-width="1.2" opacity=".85">
+    <path d="M154 20 V64"/>
+    <path d="M161 20 V64"/>
+    <path d="M168 20 V64"/>
+    <path d="M175 20 V64"/>
+    <path d="M182 20 V64"/>
+    <path d="M189 20 V64"/>
+    <path d="M196 20 V64"/>
+    <path d="M203 20 V64"/>
+    <path d="M210 20 V64"/>
+    <path d="M217 20 V64"/>
+    <path d="M224 20 V64"/>
+    <path d="M231 20 V64"/>
+    <path d="M238 20 V64"/>
+    <path d="M245 20 V64"/>
+  </g>
+  <circle cx="200" cy="46" r="8" fill="#6A3A18" stroke="#C49A3A" stroke-width="2"/>
+  <circle cx="200" cy="46" r="3" fill="#C49A3A"/>
+  <path d="M148 64 H252" stroke="#4A2811" stroke-width="4"/>
+  <!-- finial (thazhikakkudam) -->
+  <path d="M200 0 C196 4 195 8 197 11 H203 C205 8 204 4 200 0 Z" fill="#C49A3A"/>
+  <ellipse cx="200" cy="10" rx="4.5" ry="2.2" fill="#C49A3A"/>
+  <!-- ridge -->
+  <path d="M96 58 H304" stroke="#6E2A16" stroke-width="3"/>
+  <!-- eave fascia with hanging drops -->
+  <rect x="-10" y="138" width="420" height="12" fill="#4A2811"/>
+  <rect x="-10" y="140" width="420" height="2" fill="#C49A3A" opacity=".8"/>
+  <path d="M2 150 H10 L6 160 Z" fill="#4A2811"/><circle cx="6" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M20 150 H28 L24 160 Z" fill="#4A2811"/><circle cx="24" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M38 150 H46 L42 160 Z" fill="#4A2811"/><circle cx="42" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M56 150 H64 L60 160 Z" fill="#4A2811"/><circle cx="60" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M74 150 H82 L78 160 Z" fill="#4A2811"/><circle cx="78" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M92 150 H100 L96 160 Z" fill="#4A2811"/><circle cx="96" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M110 150 H118 L114 160 Z" fill="#4A2811"/><circle cx="114" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M128 150 H136 L132 160 Z" fill="#4A2811"/><circle cx="132" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M146 150 H154 L150 160 Z" fill="#4A2811"/><circle cx="150" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M164 150 H172 L168 160 Z" fill="#4A2811"/><circle cx="168" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M182 150 H190 L186 160 Z" fill="#4A2811"/><circle cx="186" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M200 150 H208 L204 160 Z" fill="#4A2811"/><circle cx="204" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M218 150 H226 L222 160 Z" fill="#4A2811"/><circle cx="222" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M236 150 H244 L240 160 Z" fill="#4A2811"/><circle cx="240" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M254 150 H262 L258 160 Z" fill="#4A2811"/><circle cx="258" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M272 150 H280 L276 160 Z" fill="#4A2811"/><circle cx="276" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M290 150 H298 L294 160 Z" fill="#4A2811"/><circle cx="294" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M308 150 H316 L312 160 Z" fill="#4A2811"/><circle cx="312" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M326 150 H334 L330 160 Z" fill="#4A2811"/><circle cx="330" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M344 150 H352 L348 160 Z" fill="#4A2811"/><circle cx="348" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M362 150 H370 L366 160 Z" fill="#4A2811"/><circle cx="366" cy="161" r="2" fill="#C49A3A"/>
+  <path d="M380 150 H388 L384 160 Z" fill="#4A2811"/><circle cx="384" cy="161" r="2" fill="#C49A3A"/>
+</svg>

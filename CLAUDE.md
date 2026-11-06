@@ -130,14 +130,15 @@ shehnai/doli imagery, heavy maroon-and-gold "royal" Mughal styling, glitter.
 
 ### Palette (CSS custom properties on `:root`)
 ```
---ivory:     #FBF5E6   /* page background, kasavu base */
---cream:     #F4EBD6
+--ivory:     #FFFBF3   /* page background, fresh kasavu off-white (brightened 6 Nov 2026; was #FBF5E6) */
+--cream:     #F8EEDB   /* alternate section bands */
 --gold:      #C49A3A   /* kasavu zari */
 --gold-soft: #E2C878
+--gold-deep: #8A6420   /* gold for small text (passes contrast) */
 --maroon:    #7A1F2B   /* headings, accents (from the printed card) */
 --leaf:      #2F5D3A   /* Anusha's saree border green */
 --ink:       #3B2A1A   /* body text */
---muted:     #7A6A55
+--muted:     #6E5E4A   /* darkened from #7A6A55 for 4.5:1 contrast */
 ```
 Light theme only is fine (an invitation should look the same for everyone), but set
 `color-scheme: light` and an explicit `body` background so dark-mode phones do not

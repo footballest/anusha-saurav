@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 102" width="100" height="102" role="img" aria-label="Ganapathi">
+  <!-- Original simple line-art of Ganapathi for the invocation -->
+  <g fill="none" stroke="#B0832C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- crown -->
+    <path d="M36 36 L37 26 L42 20 L45 12 L50 4 L55 12 L58 20 L63 26 L64 36"/>
+    <path d="M36 29 H64 M38 22.5 H62" stroke-width="1.6"/>
+    <path d="M34 36 H66"/>
+    <!-- ears -->
+    <path d="M35 39 C26 34 12 36 9 46 C6 56 10 66 18 68 C24 70 30 69 36 66"/>
+    <path d="M65 39 C74 34 88 36 91 46 C94 56 90 66 82 68 C76 70 70 69 64 66"/>
+    <path d="M30 44 C22 43 17 48 17 54 M70 44 C78 43 83 48 83 54" stroke-width="1.4" opacity=".8"/>
+    <!-- face -->
+    <path d="M36 37 C35 48 37 58 42 64"/>
+    <path d="M64 37 C65 48 63 58 58 64"/>
+    <!-- trunk, curling to the viewer's right -->
+    <path d="M44 56 C42 70 42 84 48 92 C54 100 66 100 70 92 C72 87 68 82 64 84"/>
+    <path d="M56 56 C57 68 56 80 58 86 C59 89 62 89 63 87"/>
+    <path d="M44 74 C47 75 53 75 56 73 M44 82 C47 84 53 84 57 81" stroke-width="1.2" opacity=".7"/>
+    <!-- tusk (one, the other broken) -->
+    <path d="M58 64 C61 67 63 71 62 76"/>
+    <path d="M42 64 L40 66"/>
+  </g>
+  <!-- eyes and tilak -->
+  <g fill="#7A1F2B">
+    <path d="M40 48 Q43 45.5 46 48 Q43 49.5 40 48 Z"/>
+    <path d="M54 48 Q57 45.5 60 48 Q57 49.5 54 48 Z"/>
+    <circle cx="50" cy="41.5" r="2"/>
+    <circle cx="50" cy="13" r="1.6"/>
+  </g>
+</svg>

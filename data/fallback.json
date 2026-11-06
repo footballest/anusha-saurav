@@ -69,8 +69,8 @@
   ],
   "contacts": [
     { "name": "Saurav Krishna", "relation": "Groom", "phone_e164": "+918943503045", "whatsapp": true, "order": 1, "visible": true },
-    { "name": "Athul T K", "relation": "Bride's brother", "phone_e164": "+918547977436", "whatsapp": true, "order": 2, "visible": true },
-    { "name": "Adv. P. Viswanathan", "relation": "Groom's father", "phone_e164": "+919447337236", "whatsapp": true, "order": 3, "visible": true },
-    { "name": "Shri. Anilkumar Thattarkandy", "relation": "Bride's father", "phone_e164": "+919387685078", "whatsapp": true, "order": 4, "visible": true }
+    { "name": "Athul T K", "relation": "Bride’s brother", "phone_e164": "+918547977436", "whatsapp": true, "order": 2, "visible": true },
+    { "name": "Adv. P. Viswanathan", "relation": "Groom’s father", "phone_e164": "+919447337236", "whatsapp": true, "order": 3, "visible": true },
+    { "name": "Shri. Anilkumar Thattarkandy", "relation": "Bride’s father", "phone_e164": "+919387685078", "whatsapp": true, "order": 4, "visible": true }
   ]
 }

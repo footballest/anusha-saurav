@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 170" width="320" height="170" role="img" aria-label="Illustration of a hillside resort at dusk with palms">
+  <!-- K-Hills Resorts &amp; Spa, evening: green hills, Kerala-roof cottages with warm lit windows -->
+  <defs>
+    <linearGradient id="skyE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C9A0"/><stop offset=".6" stop-color="#FBE3C2"/><stop offset="1" stop-color="#FFF4E2"/></linearGradient>
+    <g id="palm">
+      <path d="M-4 0 C-2 -40 4 -80 10 -118 L15 -117 C10 -80 5 -40 5 0 Z" fill="#7A5230"/>
+      <g stroke="#5A3A1E" stroke-width="1" opacity=".6"><path d="M-3 -12 H5 M-2 -28 H6 M-1 -44 H7 M1 -60 H8 M3 -76 H10 M5 -92 H12 M7 -106 H14"/></g>
+      <g transform="translate(12 -118)" fill="#2F5D3A">
+        <path d="M0 0 C18 -16 46 -14 64 6 C44 -4 22 -4 0 4 Z"/>
+        <path d="M0 0 C-18 -16 -46 -14 -64 6 C-44 -4 -22 -4 0 4 Z"/>
+        <path d="M0 0 C10 -24 34 -36 56 -30 C34 -24 16 -14 0 2 Z" fill="#3F7A4A"/>
+        <path d="M0 0 C-10 -24 -34 -36 -56 -30 C-34 -24 -16 -14 0 2 Z" fill="#3F7A4A"/>
+        <path d="M0 0 C2 -20 8 -34 14 -42 C10 -28 6 -14 2 2 Z" fill="#4E8A57"/>
+        <path d="M0 2 C16 6 34 22 40 42 C28 26 14 14 0 6 Z"/>
+        <path d="M0 2 C-16 6 -34 22 -40 42 C-28 26 -14 14 0 6 Z"/>
+        <circle cx="-4" cy="6" r="4" fill="#8A6A2A"/><circle cx="4" cy="7" r="4" fill="#A07A30"/><circle cx="0" cy="11" r="3.6" fill="#8A6A2A"/>
+      </g>
+    </g>
+  </defs>
+  <rect width="320" height="170" rx="12" fill="url(#skyE)"/>
+  <circle cx="200" cy="74" r="20" fill="#F2A65A" opacity=".85"/>
+  <path d="M0 96 C50 62 96 70 140 88 C180 66 240 58 320 90 V170 H0 Z" fill="#6E9A5E"/>
+  <path d="M0 112 C60 92 120 96 170 108 C220 94 270 96 320 110 V170 H0 Z" fill="#4E8A57"/>
+  <!-- cottages -->
+  <g>
+    <rect x="76" y="112" width="58" height="34" fill="#FFF7E8"/>
+    <path d="M66 116 L92 92 H118 L144 116 Z" fill="#A9502C"/>
+    <path d="M96 92 L105 82 L114 92 Z" fill="#7E321C"/>
+    <rect x="84" y="122" width="12" height="14" fill="#F2C86A"/><rect x="114" y="122" width="12" height="14" fill="#F2C86A"/>
+    <rect x="100" y="126" width="10" height="20" fill="#6B3E1F"/>
+  </g>
+  <g>
+    <rect x="170" y="104" width="76" height="42" fill="#FFF7E8"/>
+    <path d="M158 109 L190 80 H226 L258 109 Z" fill="#A9502C"/>
+    <path d="M198 80 L208 68 L218 80 Z" fill="#7E321C"/>
+    <rect x="178" y="116" width="14" height="16" fill="#F2C86A"/><rect x="224" y="116" width="14" height="16" fill="#F2C86A"/>
+    <rect x="200" y="118" width="16" height="28" fill="#6B3E1F"/>
+    <path d="M158 109 H258" stroke="#5A3216" stroke-width="2.5"/><path d="M66 116 H144" stroke="#5A3216" stroke-width="2.5"/>
+  </g>
+  <!-- pool -->
+  <path d="M60 152 C110 146 220 146 268 152 C220 158 110 158 60 152 Z" fill="#A8D2C8"/>
+  <path d="M90 152 H130 M170 151 H220" stroke="#FFFFFF" stroke-width="1" opacity=".8"/>
+  <path d="M0 156 C80 150 240 150 320 156 V170 H0 Z" fill="#2F5D3A" opacity=".9"/>
+  <use href="#palm" transform="translate(30 162) scale(1)"/>
+  <use href="#palm" transform="translate(296 162) scale(-.9 .9)"/>
+  <use href="#palm" transform="translate(150 150) scale(.55)"/>
+</svg>
