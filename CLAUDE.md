@@ -72,7 +72,7 @@ then refreshes from the Apps Script endpoint if it is configured and reachable.
 - Bride: *daughter of* **Shri. Anilkumar Thattarkandy & Smt. Beena Tharol**,
   "Swapnam", Thattarkandy, Chungam, Westhill
 - *Decision (6 Nov 2026):* grandparents are **not** listed on the invitation (either side).
-- Groom: *son of* **Adv. Vishwanathan Ponnoth & Late Santha T**,
+- Groom: *son of* **Adv. P. Viswanathan & Late Santha T**,
   Krishna House, Annassery PO
 - House/address lines are controlled by a setting `show_addresses` (default **false**).
 - Closing line ("Sharing the happiness"): **Babna, Athul, Hridya, friends and relatives**
@@ -93,7 +93,7 @@ Notes:
 |---|---|---|
 | Saurav Krishna | Groom | +91 89435 03045 |
 | Athul T K | Bride's brother | +91 85479 77436 |
-| Adv. Vishwanathan Ponnoth | Groom's father | +91 94473 37236 |
+| Adv. P. Viswanathan | Groom's father | +91 94473 37236 |
 | Shri. Anilkumar Thattarkandy | Bride's father | +91 93876 85078 |
 
 `tel:` links use `+918943503045` format; WhatsApp links use `https://wa.me/918943503045`.
