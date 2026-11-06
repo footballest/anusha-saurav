@@ -223,7 +223,7 @@
     if (!d.settings.gallery_enabled) return "";
     return '<section class="section gallery" id="gallery" aria-labelledby="h-gallery">' +
       head("h-gallery", "Moments", "Gallery") +
-      '<p class="muted center">Photos coming soon.</p></section>';
+      '<div id="gallery-mount"></div></section>';
   }
 
   function contacts(list) {
@@ -495,6 +495,7 @@
     revealIfExists();
     if (window.Calendar) window.Calendar.bind(app, list, d);
     if (window.Music) window.Music.init(d);
+    if (window.Gallery) window.Gallery.init(d);
     if (window.initRsvp) window.initRsvp(d, VARIANT);
     setupReveal();
     setupMiniNav();
