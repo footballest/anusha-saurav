@@ -56,6 +56,11 @@
     chat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.4-4A8 8 0 1 1 8.5 19z"/><path d="M9 9.5c.5 2 2.5 4 5 5l1.2-1.2"/></svg>'
   };
 
+  var NAVICON = {
+    cal: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>'
+  };
+
   // ---------- inline SVG loader (so lamp flames can be animated) ----------
   var svgCache = {}, svgUid = 0;
   function inlineSvg(el, file) {
@@ -99,23 +104,39 @@
   }
 
   // ---------- sections ----------
+  function head(id, label, text) {
+    return '<header class="section-head">' + (label ? '<p class="label">' + label + "</p>" : "") +
+      '<h2 id="' + id + '" class="section-title">' + text + "</h2></header>";
+  }
+  function splitDot(s) { var i = String(s).lastIndexOf(" · "); return i < 0 ? [s, ""] : [s.slice(0, i), s.slice(i + 3)]; }
+
+  function frame() {
+    return '<div class="frame" aria-hidden="true">' +
+      '<svg class="frame-top" viewBox="0 0 100 40" preserveAspectRatio="none">' +
+        '<path d="M0 40 L0 32 L50 0 L100 32 L100 40" stroke-width="1"/>' +
+        '<path d="M4 40 L4 34.5 L50 5 L96 34.5 L96 40" stroke-width="1" opacity=".55"/>' +
+      "</svg><div class=\"frame-sides\"></div></div>";
+  }
+
   function hero(d) {
     var s = d.settings;
-    var greeting = VARIANT === "reception"
+    var dl = splitDot(VARIANT === "full" ? s.hero_date_full : s.hero_date_reception);
+    var intro = VARIANT === "reception"
       ? '<p class="greeting">' + esc(String(s.reception_greeting).replace("{name}", guestName())) + "</p>"
-      : "";
+      : '<p class="label">Together with their families</p><p class="lead">joyfully invite you to celebrate</p>';
     return '<section class="hero" id="top">' +
-      deco("jasmine.svg", "jasmine jasmine-l") + deco("jasmine.svg", "jasmine jasmine-r") +
-      '<img class="ganapathi" src="' + IMG + 'ganapathi.svg" alt="Ganapathi" width="64" height="65">' +
+      '<img class="ganapathi" src="' + IMG + 'ganapathi.svg" alt="Ganapathi" width="46" height="47">' +
       '<p class="invocation" lang="ml">' + esc(s.invocation) + "</p>" +
-      greeting +
+      intro +
       '<div class="hero-stage">' +
-        coupleImg(d.images.hero, "couple-hero", "Illustration of the bride and groom") +
         lampHtml("lamp-hero lamp-l") +
-        '<h1 class="names"><span class="n">Anusha</span><span class="amp">&amp;</span><span class="n">Saurav</span></h1>' +
+        coupleImg(d.images.hero, "couple-hero", "Illustration of Anusha and Saurav") +
         lampHtml("lamp-hero lamp-r") +
       "</div>" +
-      '<p class="date-line">' + esc(VARIANT === "full" ? s.hero_date_full : s.hero_date_reception) + "</p>" +
+      '<h1 class="names"><span class="n">Anusha</span><span class="amp">&amp;</span><span class="n">Saurav</span></h1>' +
+      '<span class="rule" aria-hidden="true"></span>' +
+      '<p class="date-line">' + esc(dl[0]) + "</p>" +
+      (dl[1] ? '<p class="place">' + esc(dl[1]) + "</p>" : "") +
       "</section>";
   }
 
@@ -132,22 +153,18 @@
     var s = d.settings, f = d.families;
     var intro = VARIANT === "full" ? s.full_intro : s.reception_intro;
     return '<section class="section invitation" id="invitation" aria-labelledby="h-invite">' +
-      title("h-invite", "With joy, we invite you") +
+      head("h-invite", "With the blessings of our elders", "With joy, we invite you") +
       '<p class="intro reveal">' + rich(intro) + "</p>" +
-      '<div class="families">' +
       family(s.bride_name, "daughter of", f.bride_parents, f.bride_house, s.show_addresses) +
-      '<p class="weds" aria-hidden="true">❀</p>' +
+      '<p class="weds" aria-hidden="true">&amp;</p>' +
       family(s.groom_name, "son of", f.groom_parents, f.groom_house, s.show_addresses) +
-      "</div>" +
-      deco("corner-leaf-lotus.svg", "corner corner-l", true) +
-      deco("corner-leaf-lotus.svg", "corner corner-r", true) +
       "</section>";
   }
 
   function countdown() {
     var units = [["days", "Days"], ["hours", "Hours"], ["mins", "Mins"], ["secs", "Secs"]];
-    return '<section class="section band countdown" id="countdown" aria-labelledby="h-count">' +
-      title("h-count", "Counting down to " + (VARIANT === "full" ? "the muhurtham" : "the reception")) +
+    return '<section class="section countdown" id="countdown" aria-labelledby="h-count">' +
+      head("h-count", "Counting down to", VARIANT === "full" ? "the Muhurtham" : "the Reception") +
       '<div class="cd-grid reveal" role="timer" aria-live="off">' +
       units.map(function (u) {
         return '<div class="cd-card"><span class="cd-num" data-unit="' + u[0] + '">–</span>' +
@@ -157,7 +174,7 @@
   }
 
   function eventCard(e) {
-    return '<article class="card event-card reveal" id="event-' + esc(e.id) + '">' +
+    return '<article class="event-card reveal" id="event-' + esc(e.id) + '">' +
       '<p class="event-ml" lang="ml">' + esc(e.name_ml) + "</p>" +
       '<h3 class="event-name">' + esc(e.name_en) + "</h3>" +
       '<p class="event-date">' + esc(e.date_label) + "</p>" +
@@ -170,30 +187,29 @@
 
   function events(list) {
     return '<section class="section events" id="events" aria-labelledby="h-events">' +
-      title("h-events", list.length > 1 ? "Events" : "The Celebration") +
+      head("h-events", list.length > 1 ? "Save the dates" : "Save the date", list.length > 1 ? "The Celebrations" : "The Celebration") +
       list.map(eventCard).join("") + "</section>";
   }
 
   function venues(list) {
-    return '<section class="section band venues" id="venue" aria-labelledby="h-venue">' +
-      title("h-venue", list.length > 1 ? "Venues" : "Venue") +
+    return '<section class="section venues" id="venue" aria-labelledby="h-venue">' +
+      head("h-venue", "Finding your way", list.length > 1 ? "The Venues" : "The Venue") +
       list.map(function (e) {
         var art = VIGNETTES[e.id];
-        return '<article class="card venue-card reveal">' +
+        return '<article class="venue-card reveal">' +
           (art ? deco(art, "venue-art", true) : "") +
           '<div class="venue-body">' +
-          '<p class="venue-for">' + esc(e.name_en) + "</p>" +
+          '<p class="label">' + esc(e.name_en) + "</p>" +
           '<h3 class="venue-name">' + esc(e.venue) + "</h3>" +
           '<p class="venue-addr">' + esc(e.address) + "</p>" +
-          '<a class="btn" href="' + esc(e.maps_url) + '" target="_blank" rel="noopener">' + ICON.pin + "Open in Google Maps</a>" +
+          '<div class="btn-row"><a class="btn" href="' + esc(e.maps_url) + '" target="_blank" rel="noopener">' + ICON.pin + "Open in Google Maps</a></div>" +
           "</div></article>";
       }).join("") + "</section>";
   }
 
   function rsvpSection(d) {
     return '<section class="section rsvp" id="rsvp" aria-labelledby="h-rsvp">' +
-      title("h-rsvp", "RSVP") +
-      '<p class="section-sub">Kindly let us know if you can join us.</p>' +
+      head("h-rsvp", "Kindly respond", "RSVP") +
       '<div id="rsvp-mount" class="reveal">' + (window.renderRsvp ? window.renderRsvp(d, VARIANT) : "") + "</div>" +
       "</section>";
   }
@@ -201,18 +217,18 @@
   function gallery(d) {
     if (!d.settings.gallery_enabled) return "";
     return '<section class="section gallery" id="gallery" aria-labelledby="h-gallery">' +
-      title("h-gallery", "Gallery") +
+      head("h-gallery", "Moments", "Gallery") +
       '<p class="muted center">Photos coming soon.</p></section>';
   }
 
   function contacts(list) {
-    return '<section class="section band contacts" id="contact" aria-labelledby="h-contact">' +
-      title("h-contact", "Contact") +
+    return '<section class="section contacts" id="contact" aria-labelledby="h-contact">' +
+      head("h-contact", "For any help", "Contact") +
       '<ul class="contact-list">' +
       list.map(function (c) {
         var digits = String(c.phone_e164).replace(/\D/g, "");
         var wa = !(c.whatsapp === false || String(c.whatsapp).toUpperCase() === "FALSE");
-        return '<li class="card contact reveal">' +
+        return '<li class="contact reveal">' +
           '<p class="contact-name">' + esc(c.name) + "</p>" +
           '<p class="contact-rel">' + esc(c.relation) + ' · <span class="nowrap">' + esc(phonePretty(c.phone_e164)) + "</span></p>" +
           '<div class="btn-row">' +
@@ -234,15 +250,58 @@
     var pdf = VARIANT === "full" ? d.files.pdf_full : d.files.pdf_reception;
     var qr = VARIANT === "full" ? d.files.qr_full : d.files.qr_reception;
     return '<footer class="site-footer">' +
-      '<p class="sharing-label">Sharing the happiness</p>' +
+      '<p class="label">Sharing the happiness</p>' +
       '<p class="sharing">' + esc(s.sharing_the_happiness) + "</p>" +
       '<p data-if-exists="' + esc(asset(pdf)) + '" hidden><a class="btn btn-primary" href="' + esc(asset(pdf)) + '" download>Download invitation (PDF)</a></p>' +
       '<p data-if-exists="' + esc(asset(qr)) + '" hidden><img class="qr" src="' + esc(asset(qr)) + '" alt="QR code for this invitation" width="140" height="140" loading="lazy"></p>' +
       '<div class="reveal">' + coupleImg(d.images.namaste, "couple-namaste", "Bride and groom with folded hands", true) + "</div>" +
       '<p class="footer-date">' + esc(s.footer_date) + "</p>" +
-      deco("corner-leaf-lotus.svg", "corner corner-l", true) +
-      deco("corner-leaf-lotus.svg", "corner corner-r", true) +
       "</footer>";
+  }
+
+  // ---------- theme ----------
+  var THEMES = { green: "#1F3B2D", kasavu: "#FFFFFF", lotus: "#F2DFDB", maroon: "#5E1424" };
+  function applyTheme(name) {
+    if (!THEMES[name]) return;
+    document.documentElement.setAttribute("data-theme", name);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", THEMES[name]);
+  }
+  // A small swatch picker, shown only when the URL contains ?themes — for choosing, not for guests.
+  function setupThemePicker() {
+    if (!/[?&]themes\b/.test(location.search) || document.querySelector(".theme-picker")) return;
+    var box = document.createElement("div");
+    box.className = "theme-picker";
+    box.setAttribute("role", "group");
+    box.setAttribute("aria-label", "Try a colour theme");
+    box.innerHTML = Object.keys(THEMES).map(function (k) {
+      return '<button type="button" data-theme="' + k + '" title="' + k + '" aria-label="' + k + ' theme" style="background:' + THEMES[k] + '"></button>';
+    }).join("");
+    function mark() {
+      var cur = document.documentElement.getAttribute("data-theme");
+      box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.theme === cur)); });
+    }
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      applyTheme(b.dataset.theme);
+      document.documentElement.setAttribute("data-theme-locked", "1");
+      var u = new URL(location.href); u.searchParams.set("theme", b.dataset.theme); history.replaceState(null, "", u);
+      mark();
+    });
+    document.body.appendChild(box);
+    mark();
+  }
+
+  function garland() {
+    if (document.querySelector(".garland")) return;
+    var g = document.createElement("div");
+    g.className = "garland";
+    g.setAttribute("aria-hidden", "true");
+    var n = window.innerWidth >= 768 ? 9 : 5;
+    var html = "";
+    for (var i = 0; i < n; i++) html += '<img src="' + IMG + 'jasmine.svg" alt="">';
+    g.innerHTML = html;
+    document.body.insertBefore(g, document.body.firstChild);
   }
 
   function revealIfExists() {
@@ -304,10 +363,10 @@
       nav.setAttribute("aria-label", "Sections");
       document.body.appendChild(nav);
     }
-    var links = [["events", "Events"], ["venue", "Venue"], ["rsvp", "RSVP"], ["contact", "Contact"]]
+    var links = [["events", "Events", NAVICON.cal], ["venue", "Venue", ICON.pin], ["rsvp", "RSVP", NAVICON.heart], ["contact", "Contact", ICON.phone]]
       .filter(function (l) { return document.getElementById(l[0]); });
     nav.innerHTML = '<ul>' + links.map(function (l) {
-      return '<li><a href="#' + l[0] + '" data-target="' + l[0] + '">' + l[1] + "</a></li>";
+      return '<li><a href="#' + l[0] + '" data-target="' + l[0] + '">' + l[2] + "<span>" + l[1] + "</span></a></li>";
     }).join("") + "</ul>";
 
     if (navIO) navIO.disconnect();
@@ -414,9 +473,16 @@
   function render(d) {
     var list = eventsForVariant(d.events);
     var app = document.getElementById("app");
-    app.innerHTML =
+    if (!document.documentElement.hasAttribute("data-theme-locked")) applyTheme(d.settings.theme);
+    app.innerHTML = frame() +
       hero(d) + invitation(d) + countdown() + events(list) + venues(list) +
       rsvpSection(d) + gallery(d) + contacts(d.contacts) + closing(d) + footer(d);
+    garland();
+    setupThemePicker();
+    if (!document.querySelector(".page-end")) {
+      var end = document.createElement("div"); end.className = "page-end"; end.setAttribute("aria-hidden", "true");
+      app.parentNode.insertBefore(end, app.nextSibling);
+    }
     var oc = document.getElementById("opening-couple");
     if (oc && !oc.firstChild) oc.innerHTML = coupleImg(d.images.namaste, "couple-opening", "Bride and groom with folded hands");
     loadLamps(app, true);

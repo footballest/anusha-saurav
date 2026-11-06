@@ -128,28 +128,31 @@ couple caricatures adding warmth.
 Marigold torans, mehendi patterns, Rajasthani jharokha arches, Devanagari script,
 shehnai/doli imagery, heavy maroon-and-gold "royal" Mughal styling, glitter.
 
-### Palette (CSS custom properties on `:root`)
-```
---ivory:     #FFFBF3   /* page background, fresh kasavu off-white (brightened 6 Nov 2026; was #FBF5E6) */
---cream:     #F8EEDB   /* alternate section bands */
---gold:      #C49A3A   /* kasavu zari */
---gold-soft: #E2C878
---gold-deep: #8A6420   /* gold for small text (passes contrast) */
---maroon:    #7A1F2B   /* headings, accents (from the printed card) */
---leaf:      #2F5D3A   /* Anusha's saree border green */
---ink:       #3B2A1A   /* body text */
---muted:     #6E5E4A   /* darkened from #7A6A55 for 4.5:1 contrast */
-```
-Light theme only is fine (an invitation should look the same for everyone), but set
-`color-scheme: light` and an explicit `body` background so dark-mode phones do not
-invert it.
+### Palette — four themes (decision, 6 Nov 2026)
+The first cream-on-cream look read as dull. Redesigned so an ivory **paper column**
+(gold double hairline frame with a tharavadu-gable top) sits on a **coloured, softly
+patterned page**. Colours are CSS tokens per theme in `assets/css/site.css`
+(`html[data-theme=…]`); every rule uses the tokens only.
 
-### Type (Google Fonts)
-- Display / names: **Cormorant Garamond** (600/700, italic for flourishes)
-- Body: **EB Garamond** or **Lora**
-- Small caps labels: **Marcellus**
-- Malayalam: **Manjari** for labels and the invocation; optionally **Chilanka**
-  (handwritten, cute) for one or two playful accents only
+| Theme key | Page | Paper | Titles | Feel |
+|---|---|---|---|---|
+| `green` (default) | #1F3B2D banana-leaf green | #FFFDF7 | #7A1F2B maroon | Temple Green |
+| `kasavu` | #FFFFFF | #FFFFFF | #7A1F2B | Kasavu White & Gold |
+| `lotus` | #F2DFDB blush | #FFFAF8 | #7E2A44 plum | Lotus Blush |
+| `maroon` | #5E1424 | #FFFBF4 | #6E1526 | Kumkum Maroon |
+
+Gold hairlines #C9A24A / #C49A3A, leaf green #2F5D3A, ink #33261A, muted #66584A.
+Choose the theme with `settings.theme` (data / Sheet), or `?theme=<key>` in the URL.
+`?themes` in the URL shows a swatch picker for previewing (never linked for guests).
+Saurav is still trying the themes; `green` is the default until he decides.
+Set `color-scheme: light` and explicit backgrounds so dark-mode phones do not invert it.
+
+### Type (Google Fonts) — updated 6 Nov 2026
+- Names, section and event titles: **Great Vibes** (script)
+- Small spaced capital labels, dates, buttons: **Cinzel**
+- Body: **EB Garamond**
+- Malayalam: **Manjari** for labels and the invocation
+- (Cormorant Garamond and Marcellus were dropped in the redesign.)
 - Load only the weights used; `font-display: swap`.
 
 ### Motifs to build as inline SVG (original drawings, in `assets/img/`)
@@ -162,7 +165,16 @@ invert it.
 6. **Ganapathi line-art** for the invocation.
 7. **Venue vignettes** — a simple bungalow for Staydium, a resort with palms for K-Hills.
 
-### Couple illustrations (generic for now, swappable later)
+### Couple illustrations
+*Decision (6 Nov 2026):* the hero uses Saurav's **personalised painted illustration**
+(`assets/img/couple/painted-standing.jpg`, a web-sized copy of
+`reference/couple-illustration-chatgpt.png`), approved by him for the public site.
+JPEG paintings are blended into the paper (multiply + slight brightness lift + feathered
+edges). The namaste and back poses are still the cute generic SVGs (bigger heads, closed
+happy eyes, netti chutti, palakka necklace, melmundu stole) until he makes painted
+versions in the same style.
+
+Original brief (kept for reference):
 Saurav wants to **start with generic, stylised couple illustrations** (like the decorative
 art on the reference site) and replace them with personalised ones later. So:
 
@@ -218,7 +230,7 @@ Music) but music stays off unless they press play.
 11. **Footer** — "Sharing the happiness: Babna, Athul, Hridya, friends and relatives",
     PDF download button (version-specific), QR code to this version's URL,
     small namaste couple illustration, "16 · 19 · XII · MMXXVI · Kozhikode".
-12. **Floating controls** — music toggle (bottom-right) and a sticky mini-nav
+12. **Floating controls** — music toggle (bottom-right) and a floating bottom nav pill with icons
     (Events · Venue · RSVP · Contact) that appears after scrolling past the hero.
 
 ---

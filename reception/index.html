@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#FBF5E6">
+  <meta name="theme-color" content="#1F3B2D">
   <title>Anusha &amp; Saurav · Reception Invitation</title>
   <meta name="description" content="Saturday, 19 December 2026 · K-Hills Resorts &amp; Spa, Ramanattukara. Tap to open your invitation &amp; RSVP.">
 
@@ -29,10 +29,17 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Manjari:wght@400;700&family=Marcellus&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Manjari:wght@400;700&display=swap">
   <link rel="stylesheet" href="../assets/css/site.css">
 
   <script>
+    // Theme: ?theme=green|kasavu|lotus|maroon overrides; otherwise the default below
+    // (or settings.theme from the data once loaded). Set early so the page never flashes.
+    (function () {
+      var t = new URLSearchParams(location.search).get("theme");
+      document.documentElement.setAttribute("data-theme", /^(green|kasavu|lotus|maroon)$/.test(t || "") ? t : "green");
+      if (t) document.documentElement.setAttribute("data-theme-locked", "1");
+    })();
     window.VARIANT = "reception";
     window.ROOT = "../"; // path from this page back to the site root
   </script>
