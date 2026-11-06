@@ -166,14 +166,21 @@ Set `color-scheme: light` and explicit backgrounds so dark-mode phones do not in
 7. **Venue vignettes** — a simple bungalow for Staydium, a resort with palms for K-Hills.
 
 ### Couple illustrations
-*Decision (6 Nov 2026):* the hero uses Saurav's **personalised painted illustration**
-(`assets/img/couple/painted-standing.jpg`, a web-sized copy of
-`reference/couple-illustration-chatgpt.png`), approved by him for the public site.
-JPEG paintings are blended into the paper (multiply + slight brightness lift + feathered
-edges). The back view is also painted (`painted-back.jpg`, original kept privately as
-`reference/couple-back-chatgpt.webp`). The namaste pose is still the cute generic SVG
-(bigger heads, closed happy eyes, netti chutti, palakka necklace, melmundu stole) until
-Saurav makes a painted version in the same style.
+*Decision (6 Nov 2026):* all three poses use Saurav's **personalised painted
+illustrations**, approved by him for the public site:
+
+| Slot | Web file (committed) | Original (private, in `reference/`) |
+|---|---|---|
+| `hero` | `assets/img/couple/painted-standing.jpg` | `couple-illustration-chatgpt.png` |
+| `namaste` | `assets/img/couple/painted-namaste.jpg` | `couple-namaste-chatgpt.webp` |
+| `back` | `assets/img/couple/painted-back.jpg` | `couple-back-chatgpt.webp` |
+
+Web files are 733×1100 JPEGs, **white-balanced so the painted backdrop is pure white**
+(each original had a slightly different cream). CSS then blends any `.jpg` couple image
+into the paper with `mix-blend-mode: multiply` plus feathered edges. For this to work,
+sections inside `#app` must not create their own stacking layer (no `z-index`, no
+`isolation`). When replacing a painting, white-balance it the same way first.
+The generic cute SVGs (`hero.svg`, `namaste.svg`, `back.svg`) remain as fallbacks.
 
 Original brief (kept for reference):
 Saurav wants to **start with generic, stylised couple illustrations** (like the decorative

@@ -111,7 +111,7 @@ main:focus { outline: none; }
   clip-path: polygon(50% 0, 100% 40px, 100% 100%, 0 100%, 0 40px);
 }
 /* gold double hairline frame: gable on top, straight sides */
-.frame { position: absolute; inset: 8px; pointer-events: none; z-index: 0; }
+.frame { position: absolute; inset: 8px; pointer-events: none; z-index: -1; }
 .frame-top { position: absolute; top: 0; left: 0; width: 100%; height: 40px; display: block; overflow: visible; }
 .frame-top path { fill: none; stroke: var(--line); vector-effect: non-scaling-stroke; }
 .frame-sides {
@@ -121,8 +121,9 @@ main:focus { outline: none; }
 .frame-sides::after {
   content: ""; position: absolute; inset: 0 4px 4px; border: 1px solid var(--line); border-top: 0; opacity: .55;
 }
-#app > * { position: relative; z-index: 1; }
-#app > .frame { position: absolute; z-index: 0; }
+/* sections must not form their own stacking layers, or paintings can't blend with the paper */
+#app > * { position: relative; }
+#app > .frame { position: absolute; }
 
 /* ---------- type helpers ---------- */
 .label {
@@ -198,10 +199,10 @@ main:focus { outline: none; }
 /* Couple illustrations: any SVG/PNG/WebP/JPEG, any aspect ratio — contained, never cropped */
 .couple { display: block; margin-left: auto; margin-right: auto; width: 100%; height: auto; object-fit: contain; }
 .couple-hero { max-height: min(400px, 52vh); animation: rise 1s ease .15s both; }
-/* Opaque paintings (JPEG) blend into the paper and get softly feathered edges */
+/* Opaque paintings (JPEG, white-balanced so the backdrop is pure white) blend into the paper
+   via multiply, with softly feathered edges */
 .couple[src$=".jpg"], .couple[src$=".jpeg"] {
   mix-blend-mode: multiply;
-  filter: brightness(1.055) saturate(1.05);   /* lifts the painting's cream backdrop to match the paper */
   -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 4%, #000 97%, transparent);
   -webkit-mask-composite: source-in;
           mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 4%, #000 97%, transparent);
@@ -289,14 +290,14 @@ main:focus { outline: none; }
 .closing-title { font-family: var(--font-script); font-weight: 400; font-size: 3.2rem; color: var(--title); margin: 6px 0 0; }
 
 /* ---------- footer (inside the paper) ---------- */
-.site-footer { position: relative; z-index: 1; text-align: center; padding: 46px 0 70px; }
+.site-footer { position: relative; text-align: center; padding: 46px 0 70px; }
 .site-footer::after {   /* kasavu band along the bottom edge of the paper */
   content: ""; position: absolute; left: -22px; right: -22px; bottom: 0; height: 22px;
   background: var(--kasavu) repeat-x center / 44px 22px;
 }
 .site-footer p { margin: 0 0 10px; }
 .sharing { font-family: var(--font-script); font-size: 2rem; line-height: 1.2; color: var(--title); }
-.couple-namaste { max-height: 140px; max-width: 240px; margin: 14px auto 6px; }
+.couple-namaste { max-height: min(280px, 38vh); margin: 16px auto 6px; }
 .qr { background: #fff; padding: 6px; border-radius: 8px; }
 .footer-date { font-family: var(--font-caps); letter-spacing: .14em; color: var(--muted); font-size: .78rem; margin-top: 14px !important; }
 .page-end { height: 110px; }
@@ -371,7 +372,7 @@ main:focus { outline: none; }
   transition: opacity .3s ease, transform .3s ease;
 }
 .plaque::before { content: ""; position: absolute; inset: 6px; border: 1px solid var(--line); border-radius: 3px; pointer-events: none; }
-.plaque-couple { height: 112px; margin: 0 0 6px; display: flex; align-items: flex-end; justify-content: center; }
+.plaque-couple { height: min(170px, 22vh); margin: 0 0 4px; display: flex; align-items: flex-end; justify-content: center; }
 .plaque-couple .couple { max-height: 100%; }
 .opening-initials { font-family: var(--font-script); font-size: 3rem; line-height: 1; color: var(--title); margin: 4px 0 2px; }
 .opening-initials span { color: var(--accent); font-family: var(--font-body); font-size: .5em; vertical-align: .3em; }
