@@ -1,0 +1,59 @@
+<!doctype html>
+<!--
+  RECEPTION-ONLY version of the invitation.
+  BASE URL lives in two places in this file: og:url and og:image below.
+  Current base: https://footballest.github.io/anusha-saurav/
+  If the domain changes, search-and-replace that string in index.html and reception/index.html.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#FBF5E6">
+  <title>Anusha &amp; Saurav · Reception Invitation</title>
+  <meta name="description" content="Saturday, 19 December 2026 · K-Hills Resorts &amp; Spa, Ramanattukara. Tap to open your invitation &amp; RSVP.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Anusha &amp; Saurav · Reception Invitation">
+  <meta property="og:description" content="Saturday, 19 December 2026 · K-Hills Resorts &amp; Spa, Ramanattukara. Tap to open your invitation &amp; RSVP.">
+  <meta property="og:url" content="https://footballest.github.io/anusha-saurav/reception/">
+  <meta property="og:image" content="https://footballest.github.io/anusha-saurav/assets/img/og-reception.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Anusha &amp; Saurav · Reception Invitation">
+  <meta name="twitter:description" content="Saturday, 19 December 2026 · K-Hills Resorts &amp; Spa, Ramanattukara. Tap to open your invitation &amp; RSVP.">
+  <meta name="twitter:image" content="https://footballest.github.io/anusha-saurav/assets/img/og-reception.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Manjari:wght@400;700&family=Marcellus&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+
+  <script>
+    window.VARIANT = "reception";
+    window.ROOT = "../"; // path from this page back to the site root
+  </script>
+  <script src="../assets/js/config.js" defer></script>
+  <script src="../assets/js/data.js" defer></script>
+  <script src="../assets/js/rsvp.js" defer></script>
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body class="variant-reception">
+  <a class="skip-link" href="#app">Skip to invitation</a>
+
+  <div id="opening" class="opening" role="dialog" aria-label="Invitation cover" hidden>
+    <div class="opening-inner">
+      <p class="opening-initials" aria-hidden="true">A ❀ S</p>
+      <p class="opening-line">You are cordially invited</p>
+      <button type="button" class="btn btn-primary" id="open-invitation">Open Invitation</button>
+    </div>
+  </div>
+
+  <main id="app" tabindex="-1">
+    <noscript><p class="noscript">Please enable JavaScript to view this invitation.</p></noscript>
+  </main>
+</body>
+</html>
