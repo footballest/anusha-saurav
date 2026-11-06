@@ -170,9 +170,10 @@ Set `color-scheme: light` and explicit backgrounds so dark-mode phones do not in
 (`assets/img/couple/painted-standing.jpg`, a web-sized copy of
 `reference/couple-illustration-chatgpt.png`), approved by him for the public site.
 JPEG paintings are blended into the paper (multiply + slight brightness lift + feathered
-edges). The namaste and back poses are still the cute generic SVGs (bigger heads, closed
-happy eyes, netti chutti, palakka necklace, melmundu stole) until he makes painted
-versions in the same style.
+edges). The back view is also painted (`painted-back.jpg`, original kept privately as
+`reference/couple-back-chatgpt.webp`). The namaste pose is still the cute generic SVG
+(bigger heads, closed happy eyes, netti chutti, palakka necklace, melmundu stole) until
+Saurav makes a painted version in the same style.
 
 Original brief (kept for reference):
 Saurav wants to **start with generic, stylised couple illustrations** (like the decorative

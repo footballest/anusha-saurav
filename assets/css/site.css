@@ -285,7 +285,7 @@ main:focus { outline: none; }
 
 /* ---------- closing ---------- */
 .closing { padding-bottom: 20px; }
-.couple-back { max-height: min(300px, 40vh); }
+.couple-back { max-height: min(420px, 56vh); }
 .closing-title { font-family: var(--font-script); font-weight: 400; font-size: 3.2rem; color: var(--title); margin: 6px 0 0; }
 
 /* ---------- footer (inside the paper) ---------- */
