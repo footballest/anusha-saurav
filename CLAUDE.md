@@ -75,7 +75,8 @@ then refreshes from the Apps Script endpoint if it is configured and reachable.
 - Groom: *son of* **Adv. P. Viswanathan & Late Santha T**,
   Krishna House, Annassery PO
 - House/address lines are controlled by a setting `show_addresses` (default **false**).
-- Closing line ("Sharing the happiness"): **Babna, Athul, Hridya, friends and relatives**
+- Closing line ("Sharing the happiness"): **Swathi, Rajeesh, Dheerav, Athul, Babna, Hridya, friends & relatives**
+  *(updated 7 Nov 2026 — Swathi, Rajeesh, Dheerav added first; this order)*
 
 ### Events
 | id | Name | Malayalam label | Date | Time (IST) | Venue | Address | Map |
@@ -236,7 +237,7 @@ Music) but music stays off unless they press play.
    Wedding · Reception. Lightbox on tap.
 9. **Contacts** — the four contacts with Call / WhatsApp.
 10. **Closing** — "See you there!" with the back-view couple illustration (added in Phase 3).
-11. **Footer** — "Sharing the happiness: Babna, Athul, Hridya, friends and relatives",
+11. **Footer** — "Sharing the happiness: Swathi, Rajeesh, Dheerav, Athul, Babna, Hridya, friends & relatives",
     PDF download button (version-specific), QR code to this version's URL,
     small namaste couple illustration, "16 · 19 · XII · MMXXVI · Kozhikode".
 12. **Floating controls** — music toggle (bottom-right) and a floating bottom nav pill with icons
