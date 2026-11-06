@@ -136,7 +136,7 @@ patterned page**. Colours are CSS tokens per theme in `assets/css/site.css`
 
 | Theme key | Page | Paper | Titles | Feel |
 |---|---|---|---|---|
-| `green` (default) | #1F3B2D banana-leaf green | #FFFDF7 | #7A1F2B maroon | Temple Green |
+| `green` (**chosen**) | #1F3B2D banana-leaf green | #FFFDF7 | #7A1F2B maroon | Temple Green |
 | `kasavu` | #FFFFFF | #FFFFFF | #7A1F2B | Kasavu White & Gold |
 | `lotus` | #F2DFDB blush | #FFFAF8 | #7E2A44 plum | Lotus Blush |
 | `maroon` | #5E1424 | #FFFBF4 | #6E1526 | Kumkum Maroon |
@@ -144,7 +144,8 @@ patterned page**. Colours are CSS tokens per theme in `assets/css/site.css`
 Gold hairlines #C9A24A / #C49A3A, leaf green #2F5D3A, ink #33261A, muted #66584A.
 Choose the theme with `settings.theme` (data / Sheet), or `?theme=<key>` in the URL.
 `?themes` in the URL shows a swatch picker for previewing (never linked for guests).
-Saurav is still trying the themes; `green` is the default until he decides.
+*Decision (6 Nov 2026):* Saurav chose **Temple Green** (`green`). The other three themes
+stay in the CSS as alternatives; `?themes` still shows the preview picker.
 Set `color-scheme: light` and explicit backgrounds so dark-mode phones do not invert it.
 
 ### Type (Google Fonts) — updated 6 Nov 2026
