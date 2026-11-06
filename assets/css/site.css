@@ -355,6 +355,26 @@ fieldset .field-error { margin-bottom: 0; }
 .mini-nav a.active { background: var(--btn); color: var(--btn-ink); }
 .mini-nav a:focus-visible { outline: 2px solid var(--label); outline-offset: -2px; }
 
+/* ---------- music toggle (bottom-right, above the nav pill) ---------- */
+.music-btn {
+  position: fixed; z-index: 41; right: 14px;
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 70px);
+  width: 50px; height: 50px; padding: 0; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer;
+  color: var(--title); background: color-mix(in srgb, var(--paper) 94%, transparent);
+  border: 1px solid var(--line); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .5);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.music-btn svg { width: 30px; height: 30px; }
+.music-btn:focus-visible { outline: 2px solid var(--label); outline-offset: 3px; }
+.music-btn.is-playing { background: var(--btn); color: var(--btn-ink); border-color: var(--btn); }
+.music-btn.is-playing::after {   /* soft ripple while playing */
+  content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--line);
+  animation: ripple 2.4s ease-out infinite;
+}
+@keyframes ripple { from { transform: scale(1); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+body.is-locked .music-btn { display: none; }
+
 /* ---------- theme picker (only with ?themes in the URL; for choosing, never shown to guests) ---------- */
 .theme-picker {
   position: fixed; top: 10px; right: 10px; z-index: 60; display: flex; gap: 6px; align-items: center;
@@ -437,7 +457,7 @@ fieldset .field-error { margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .lamp .flame.on, .couple-hero { animation: none; }
+  .lamp .flame.on, .couple-hero, .music-btn.is-playing::after { animation: none; }
   .lamp .flame, .door, .roof, .plaque, .mini-nav { transition-duration: .01s; }
   .opening { transition: opacity .35s ease; }
 }

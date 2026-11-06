@@ -494,6 +494,7 @@
     startCountdown(d);
     revealIfExists();
     if (window.Calendar) window.Calendar.bind(app, list, d);
+    if (window.Music) window.Music.init(d);
     if (window.initRsvp) window.initRsvp(d, VARIANT);
     setupReveal();
     setupMiniNav();
