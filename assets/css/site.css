@@ -243,6 +243,14 @@ main:focus { outline: none; }
   background: var(--btn); color: var(--btn-ink); font-variant-numeric: lining-nums;
 }
 .event-venue { font-style: italic; color: var(--muted); }
+.event-card .btn-row .btn { flex: 1 1 auto; }
+.btn[aria-expanded="true"] { background: var(--paper-2); }
+.cal-menu {
+  display: flex; flex-direction: column; gap: 8px; align-items: stretch;
+  margin: 12px auto 0; max-width: 300px; padding-top: 12px;
+  border-top: 1px dashed color-mix(in srgb, var(--line) 70%, transparent);
+}
+.cal-menu .btn { font-size: .7rem; letter-spacing: .12em; }
 
 /* ---------- venues ---------- */
 .venue-card { margin: 0 0 22px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); }

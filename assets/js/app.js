@@ -173,7 +173,8 @@
       "</div></section>";
   }
 
-  function eventCard(e) {
+  function eventCard(e, d) {
+    var cal = window.Calendar;
     return '<article class="event-card reveal" id="event-' + esc(e.id) + '">' +
       '<p class="event-ml" lang="ml">' + esc(e.name_ml) + "</p>" +
       '<h3 class="event-name">' + esc(e.name_en) + "</h3>" +
@@ -182,13 +183,17 @@
       '<p class="event-venue">' + esc(e.venue) + "</p>" +
       '<div class="btn-row">' +
       '<a class="btn" href="' + esc(e.maps_url) + '" target="_blank" rel="noopener">' + ICON.pin + "Directions</a>" +
-      "</div></article>";
+      (cal ? '<button type="button" class="btn" data-cal-toggle aria-expanded="false" aria-controls="cal-' + esc(e.id) + '">' +
+        NAVICON.cal + "Add to calendar</button>" : "") +
+      "</div>" +
+      (cal ? cal.menuHtml(e, d) : "") +
+      "</article>";
   }
 
-  function events(list) {
+  function events(list, d) {
     return '<section class="section events" id="events" aria-labelledby="h-events">' +
       head("h-events", list.length > 1 ? "Save the dates" : "Save the date", list.length > 1 ? "The Celebrations" : "The Celebration") +
-      list.map(eventCard).join("") + "</section>";
+      list.map(function (e) { return eventCard(e, d); }).join("") + "</section>";
   }
 
   function venues(list) {
@@ -475,7 +480,7 @@
     var app = document.getElementById("app");
     if (!document.documentElement.hasAttribute("data-theme-locked")) applyTheme(d.settings.theme);
     app.innerHTML = frame() +
-      hero(d) + invitation(d) + countdown() + events(list) + venues(list) +
+      hero(d) + invitation(d) + countdown() + events(list, d) + venues(list) +
       rsvpSection(d) + gallery(d) + contacts(d.contacts) + closing(d) + footer(d);
     garland();
     setupThemePicker();
@@ -488,6 +493,7 @@
     loadLamps(app, true);
     startCountdown(d);
     revealIfExists();
+    if (window.Calendar) window.Calendar.bind(app, list, d);
     if (window.initRsvp) window.initRsvp(d, VARIANT);
     setupReveal();
     setupMiniNav();
