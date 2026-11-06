@@ -38,10 +38,12 @@
     return '<img class="' + cls + '" src="' + IMG + file + '" alt="" aria-hidden="true"' +
       (lazy ? ' loading="lazy"' : "") + ' decoding="async">';
   }
-  function coupleImg(src, cls, alt) {
-    // Hidden automatically if the file is missing.
-    return '<img class="' + cls + '" src="' + esc(asset(src)) + '" alt="' + esc(alt) +
-      '" decoding="async" onerror="this.hidden=true">';
+  // Couple illustrations come only from the `images` block in the data, so they can be
+  // swapped (SVG or transparent PNG/WebP, any aspect ratio) by changing one path.
+  function coupleImg(src, cls, alt, lazy) {
+    if (!src) return "";
+    return '<img class="couple ' + cls + '" src="' + esc(asset(src)) + '" alt="' + esc(alt) +
+      '"' + (lazy ? ' loading="lazy"' : "") + ' decoding="async" onerror="this.hidden=true">';
   }
   function title(id, text) {
     return '<h2 id="' + id + '" class="section-title">' + text + "</h2>";
@@ -220,17 +222,23 @@
       }).join("") + "</ul></section>";
   }
 
+  function closing(d) {
+    return '<section class="section closing" id="see-you" aria-labelledby="h-closing">' +
+      '<div class="reveal">' + coupleImg(d.images.back, "couple-back", "The bride and groom walking together, holding hands", true) + "</div>" +
+      '<h2 id="h-closing" class="closing-title reveal">See you there!</h2>' +
+      "</section>";
+  }
+
   function footer(d) {
     var s = d.settings;
     var pdf = VARIANT === "full" ? d.files.pdf_full : d.files.pdf_reception;
     var qr = VARIANT === "full" ? d.files.qr_full : d.files.qr_reception;
     return '<footer class="site-footer">' +
-      deco("nilavilakku.svg", "footer-lamp", true) +
       '<p class="sharing-label">Sharing the happiness</p>' +
       '<p class="sharing">' + esc(s.sharing_the_happiness) + "</p>" +
       '<p data-if-exists="' + esc(asset(pdf)) + '" hidden><a class="btn btn-primary" href="' + esc(asset(pdf)) + '" download>Download invitation (PDF)</a></p>' +
       '<p data-if-exists="' + esc(asset(qr)) + '" hidden><img class="qr" src="' + esc(asset(qr)) + '" alt="QR code for this invitation" width="140" height="140" loading="lazy"></p>' +
-      coupleImg(d.images.namaste, "couple-namaste", "Bride and groom with folded hands") +
+      '<div class="reveal">' + coupleImg(d.images.namaste, "couple-namaste", "Bride and groom with folded hands", true) + "</div>" +
       '<p class="footer-date">' + esc(s.footer_date) + "</p>" +
       deco("corner-leaf-lotus.svg", "corner corner-l", true) +
       deco("corner-leaf-lotus.svg", "corner corner-r", true) +
@@ -340,6 +348,7 @@
           '<div class="door door-l"><img src="' + IMG + 'door.svg" alt="" aria-hidden="true"></div>' +
           '<div class="door door-r"><img src="' + IMG + 'door.svg" alt="" aria-hidden="true"></div>' +
           '<div class="plaque">' +
+            '<div class="plaque-couple" id="opening-couple"></div>' +
             '<p class="opening-initials" aria-hidden="true">A <span>❀</span> S</p>' +
             '<p class="opening-names">Anusha &amp; Saurav</p>' +
             '<p class="opening-line">You are cordially invited</p>' +
@@ -407,7 +416,9 @@
     var app = document.getElementById("app");
     app.innerHTML =
       hero(d) + invitation(d) + countdown() + events(list) + venues(list) +
-      rsvpSection(d) + gallery(d) + contacts(d.contacts) + footer(d);
+      rsvpSection(d) + gallery(d) + contacts(d.contacts) + closing(d) + footer(d);
+    var oc = document.getElementById("opening-couple");
+    if (oc && !oc.firstChild) oc.innerHTML = coupleImg(d.images.namaste, "couple-opening", "Bride and groom with folded hands");
     loadLamps(app, true);
     startCountdown(d);
     revealIfExists();

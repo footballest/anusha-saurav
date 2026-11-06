@@ -214,10 +214,11 @@ Music) but music stays off unless they press play.
 8. **Gallery** — hidden until `gallery_enabled` is true. Tabs: Save the Date ·
    Wedding · Reception. Lightbox on tap.
 9. **Contacts** — the four contacts with Call / WhatsApp.
-10. **Footer** — "Sharing the happiness: Babna, Athul, Hridya, friends and relatives",
+10. **Closing** — "See you there!" with the back-view couple illustration (added in Phase 3).
+11. **Footer** — "Sharing the happiness: Babna, Athul, Hridya, friends and relatives",
     PDF download button (version-specific), QR code to this version's URL,
     small namaste couple illustration, "16 · 19 · XII · MMXXVI · Kozhikode".
-11. **Floating controls** — music toggle (bottom-right) and a sticky mini-nav
+12. **Floating controls** — music toggle (bottom-right) and a sticky mini-nav
     (Events · Venue · RSVP · Contact) that appears after scrolling past the hero.
 
 ---
