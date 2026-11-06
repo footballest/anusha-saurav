@@ -342,6 +342,61 @@ fieldset .field-error { margin-bottom: 0; }
 .lb-prev { left: 8px; }
 .lb-next { right: 8px; }
 
+/* ---------- photo upload page (/upload/) ---------- */
+.upload-hero { padding: 64px 0 6px; }
+.upload-hero .section-title { font-size: 3rem; }
+.upload-hero .lead { font-size: 1.05rem; line-height: 1.5; margin-top: 10px; }
+.couple-upload { max-height: min(220px, 30vh); margin-top: 12px; }
+.upload-section { padding-top: 26px; }
+.upload-section::before { display: none !important; }
+.upload-form input[type="password"] {
+  display: block; width: 100%; margin-top: 6px; min-height: 46px; padding: 10px 12px;
+  font: inherit; font-family: var(--font-body); font-size: 1.08rem; letter-spacing: .08em; text-transform: none; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+}
+.upload-form input[type="password"]:focus-visible { outline: 2px solid var(--label); outline-offset: 1px; }
+.form-help { margin: 6px 0 16px; font-size: .98rem; font-style: italic; color: var(--muted); }
+.dropzone {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  margin-top: 8px; min-height: 120px; padding: 18px; cursor: pointer; text-align: center;
+  border: 1.5px dashed var(--line); border-radius: 16px; background: var(--paper);
+  transition: background-color .2s, border-color .2s;
+}
+.dropzone:hover, .dropzone.is-over { background: color-mix(in srgb, var(--line) 12%, var(--paper)); border-color: var(--title); }
+.dropzone:focus-within { outline: 2px solid var(--label); outline-offset: 2px; }
+.dropzone input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.dropzone-icon { font-size: 1.6rem; line-height: 1; color: var(--accent); }
+.dropzone-text { font-family: var(--font-caps); font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: var(--title); }
+.dropzone-sub { font-family: var(--font-body); font-style: italic; font-size: .98rem; letter-spacing: 0; text-transform: none; color: var(--muted); }
+.upload-summary { margin: 0 0 8px; text-align: center; font-family: var(--font-caps); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--label); }
+.upload-summary:empty { display: none; }
+.file-list { list-style: none; margin: 0 0 16px; padding: 0; }
+.file-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 40%, transparent); }
+.file-thumb {
+  flex: none; width: 52px; height: 52px; border-radius: 8px; overflow: hidden; display: grid; place-items: center;
+  background: var(--paper); border: 1px solid color-mix(in srgb, var(--line) 60%, transparent); color: var(--accent);
+}
+.file-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.file-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.file-name { font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-meta { font-size: .9rem; line-height: 1.3; color: var(--muted); }
+.is-done .file-status { color: var(--label); }
+.is-failed .file-status, .is-skipped .file-status { color: var(--title); }
+.is-skipped .file-name { text-decoration: line-through; color: var(--muted); }
+.bar { display: block; height: 4px; border-radius: 4px; background: color-mix(in srgb, var(--line) 25%, transparent); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--label); border-radius: 4px; transition: width .4s ease; }
+.is-done .bar i { background: var(--label); }
+.is-sending .bar i { background: linear-gradient(90deg, var(--label) 40%, var(--accent) 50%, var(--label) 60%); background-size: 200% 100%; animation: sending 1.2s linear infinite; }
+@keyframes sending { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.file-remove {
+  flex: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; line-height: 1;
+  color: var(--muted); background: transparent; border: 1px solid transparent;
+}
+.file-remove:hover { border-color: var(--line); }
+.upload-thanks { margin: 14px 0 0; text-align: center; font-family: var(--font-script); font-size: 2rem; line-height: 1.2; color: var(--title); }
+.upload-footer { padding-top: 10px; }
+.upload-footer::before { display: none !important; }
+
 /* ---------- contacts ---------- */
 .contact-list { list-style: none; margin: 0; padding: 0; }
 .contact { padding: 16px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 45%, transparent); }
@@ -493,7 +548,7 @@ body.is-locked .music-btn { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .lamp .flame.on, .couple-hero, .music-btn.is-playing::after { animation: none; }
+  .lamp .flame.on, .couple-hero, .music-btn.is-playing::after, .is-sending .bar i { animation: none; }
   .lamp .flame, .door, .roof, .plaque, .mini-nav { transition-duration: .01s; }
   .opening { transition: opacity .35s ease; }
 }
