@@ -510,6 +510,12 @@ QR codes, OG images, PDFs. Then, with Saurav's go-ahead: create the GitHub repo
 `anusha-saurav` under `footballest` (public), push, enable Pages (main, root), verify
 both live URLs, check WhatsApp previews.
 ✅ Checkpoint: both live links work on Saurav's phone.
+*Done 8 Nov 2026 (with Saurav's go-ahead):* public repo
+https://github.com/footballest/anusha-saurav created and pushed; Pages serves `main` /
+root (`.nojekyll`). Commits use footballest's GitHub no-reply email
+(`74678792+footballest@users.noreply.github.com`, set in this repo's git config); history
+was rewritten to it before the first push. Regenerate assets with `npm run assets`
+(needs Google Chrome installed). Still to check: WhatsApp previews on Saurav's phone.
 
 **Phase 7 — After the wedding (later)**
 Turn on `gallery_enabled`, share the upload link + passcode with friends, approve
