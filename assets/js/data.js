@@ -46,6 +46,13 @@
       d.settings[k] = toBool(d.settings[k]);
     });
     d.events.forEach(function (e) { e.order = Number(e.order) || 0; });
+    // Keep only this version's events (the reception page never holds wedding details).
+    var V = window.VARIANT;
+    if (V === "full" || V === "reception") {
+      d.events = d.events.filter(function (e) {
+        return String(e.variants).split(",").map(function (x) { return x.trim(); }).indexOf(V) !== -1;
+      });
+    }
     d.events.sort(function (a, b) { return a.order - b.order; });
     d.contacts = d.contacts
       .map(function (c) {
@@ -61,7 +68,7 @@
 
   window.loadSiteData = function (onData) {
     var root = window.ROOT || "./";
-    fetch(root + "data/fallback.json", { cache: "no-cache" })
+    fetch(root + "data/fallback.json")   // preloaded by the page
       .then(function (r) { return r.json(); })
       .then(function (fallback) {
         var cached = readCache();

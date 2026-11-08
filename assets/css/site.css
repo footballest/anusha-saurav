@@ -65,6 +65,9 @@ body {
   transition: background-color .4s ease;
 }
 body.is-locked { overflow: hidden; }
+/* Opening cover: its markup is in the page; shown only while <html> has .has-cover */
+html.has-cover body { overflow: hidden; }
+html.has-cover .music-btn { display: none; }
 
 /* faint lotus pattern over the page colour */
 body::before {
@@ -199,6 +202,8 @@ main:focus { outline: none; }
 /* Couple illustrations: any SVG/PNG/WebP/JPEG, any aspect ratio — contained, never cropped */
 .couple { display: block; margin-left: auto; margin-right: auto; width: 100%; height: auto; object-fit: contain; }
 .couple-hero { max-height: min(400px, 52vh); animation: rise 1s ease .15s both; }
+/* Reserve the painting's space before it loads (no jump); other shapes are contained inside */
+.couple-hero, .couple-back, .couple-namaste, .couple-thanks { aspect-ratio: 2 / 3; }
 /* Opaque paintings (JPEG, white-balanced so the backdrop is pure white) blend into the paper
    via multiply, with softly feathered edges */
 .couple[src$=".jpg"], .couple[src$=".jpeg"] {
@@ -346,7 +351,8 @@ fieldset .field-error { margin-bottom: 0; }
 .upload-hero { padding: 64px 0 6px; }
 .upload-hero .section-title { font-size: 3rem; }
 .upload-hero .lead { font-size: 1.05rem; line-height: 1.5; margin-top: 10px; }
-.couple-upload { max-height: min(220px, 30vh); margin-top: 12px; }
+.upload-couple { height: min(220px, 30vh); margin-top: 12px; display: flex; justify-content: center; }
+.couple-upload { max-height: 100%; width: auto; }
 .upload-section { padding-top: 26px; }
 .upload-section::before { display: none !important; }
 .upload-form input[type="password"] {
@@ -475,6 +481,8 @@ body.is-locked .music-btn { display: none; }
 .theme-picker button[aria-pressed="true"] { box-shadow: 0 0 0 2px #222; }
 
 /* ---------- opening screen ---------- */
+.opening { display: none; }
+html.has-cover .opening { display: block; }
 .opening {
   position: fixed; inset: 0; z-index: 50; overflow: hidden;
   background: var(--page);

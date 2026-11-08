@@ -29,8 +29,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Manjari:wght@400;700&display=swap">
+  <!-- Fonts load without blocking the first paint -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Manjari:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Manjari:wght@400;700&display=swap"></noscript>
   <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="fetch" href="../data/fallback.json" crossorigin>
 
   <script>
     // Theme: ?theme=green|kasavu|lotus|maroon overrides; otherwise the default below
@@ -39,6 +43,11 @@
       var t = new URLSearchParams(location.search).get("theme");
       document.documentElement.setAttribute("data-theme", /^(green|kasavu|lotus|maroon)$/.test(t || "") ? t : "green");
       if (t) document.documentElement.setAttribute("data-theme-locked", "1");
+      // Show the opening cover (built into this page) unless it was already opened this
+      // visit or the link has ?open.
+      var seen = false;
+      try { seen = sessionStorage.getItem("as-opened") === "1"; } catch (e) {}
+      if (!seen && !/[?&]open\b/.test(location.search)) document.documentElement.classList.add("has-cover");
     })();
     window.VARIANT = "reception";
     window.ROOT = "../"; // path from this page back to the site root
@@ -54,8 +63,26 @@
 <body class="variant-reception">
   <a class="skip-link" href="#app">Skip to invitation</a>
 
-  <!-- Opening cover (tharavadu doors + lamps) is built by app.js -->
-  <div id="opening" class="opening" role="dialog" aria-modal="true" aria-label="Invitation cover" hidden></div>
+  <!-- Opening cover (tharavadu doors + lamps). Shown only when <html> has the has-cover class;
+       app.js lights the lamps and opens the doors. -->
+  <div id="opening" class="opening" role="dialog" aria-modal="true" aria-label="Invitation cover">
+    <div class="house">
+      <img class="roof" src="../assets/img/roof.svg" alt="" aria-hidden="true" width="400" height="170">
+      <div class="doorway">
+        <div class="door door-l"><img src="../assets/img/door.svg" alt="" aria-hidden="true" width="190" height="650"></div>
+        <div class="door door-r"><img src="../assets/img/door.svg" alt="" aria-hidden="true" width="190" height="650"></div>
+        <div class="plaque">
+          <div class="plaque-couple" id="opening-couple"><img class="couple couple-opening" src="../assets/img/couple/painted-namaste.jpg" alt="Bride and groom with folded hands" width="733" height="1100"></div>
+          <p class="opening-initials" aria-hidden="true">A <span>❀</span> S</p>
+          <p class="opening-names">Anusha &amp; Saurav</p>
+          <p class="opening-line">You are cordially invited</p>
+          <button type="button" class="btn btn-primary" id="open-invitation">Open Invitation</button>
+        </div>
+      </div>
+      <span class="lamp lamp-open lamp-l" aria-hidden="true"></span><span class="lamp lamp-open lamp-r" aria-hidden="true"></span>
+    </div>
+    <button type="button" class="skip" id="skip-opening" hidden>Skip</button>
+  </div>
 
   <main id="app" tabindex="-1">
     <noscript><p class="noscript">Please enable JavaScript to view this invitation.</p></noscript>

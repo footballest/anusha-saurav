@@ -253,7 +253,8 @@ Music) but music stays off unless they press play.
 ├── index.html                 # Full version (default, main link)
 ├── reception/index.html       # Reception-only version
 ├── upload/index.html          # Passcode upload page (unlisted, noindex)
-├── print/index.html           # Print layout, ?v=full|reception
+├── print/index.html           # Print layout, ?v=full|reception (makes the PDFs)
+├── print/og.html              # 1200×630 preview-image template (makes og-*.jpg)
 ├── robots.txt
 ├── .gitignore                 # node_modules, reference/, .env, .DS_Store
 ├── assets/
@@ -277,6 +278,7 @@ Music) but music stays off unless they press play.
 │   ├── Code.gs                # pasted into the Google Sheet's Apps Script editor
 │   └── README.md              # exact deploy steps for Saurav
 ├── scripts/
+│   ├── lib.mjs                # shared: tiny static server, launches the installed Chrome
 │   ├── make-qr.mjs            # QR SVGs for both URLs
 │   ├── make-og.mjs            # 1200x630 preview images via Playwright
 │   └── make-pdf.mjs           # PDFs from /print/ via Playwright
@@ -422,6 +424,9 @@ Edit → New version, keeping the same URL).
 ## 9. Music
 
 - Off by default. A floating round button with a small veena icon toggles play/pause.
+- *Decision (8 Nov 2026):* `files.music` in `data/fallback.json` is empty until Saurav
+  supplies the track (avoids a "file not found" check on every visit). When the mp3 is
+  added at `assets/audio/theme.mp3`, set `files.music` to that path in the same commit.
 - File `assets/audio/theme.mp3`, a royalty-free instrumental Saurav will supply
   (Pixabay Music or YouTube Audio Library). Never use film songs.
 - Loop, volume 0.4, fade in/out over 1 s. Remember the choice in localStorage.
@@ -460,6 +465,11 @@ Edit → New version, keeping the same URL).
   JavaScript-rendered page, its OG tags, its PDF or its `.ics`.
 - Before calling a phase done, run the local server, take screenshots at 375px of every
   section of both versions, and show them to Saurav.
+- *Performance decisions (8 Nov 2026):* the opening cover's markup lives in each HTML page
+  (shown when the inline head script adds `html.has-cover`), so it paints before any script
+  runs; Google Fonts load without blocking (`rel=preload` + `onload`); `data/fallback.json`
+  is preloaded; couple paintings reserve a 2:3 box. Lighthouse mobile on localhost:
+  full 95, reception 92, upload 100; accessibility and best practices 100 on all three.
 
 ---
 

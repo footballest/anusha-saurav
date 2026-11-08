@@ -398,33 +398,13 @@
   }
 
   // ---------- opening screen ----------
+  // The cover's markup is in the HTML page (so it paints before any script runs); the
+  // inline script in <head> adds html.has-cover when it should be shown.
   function setupOpening() {
     var opening = document.getElementById("opening");
     if (!opening) return;
-    var seen = false;
-    try { seen = sessionStorage.getItem("as-opened") === "1"; } catch (e) {}
-    if (seen || /[?&]open\b/.test(location.search)) return;
-
-    opening.innerHTML =
-      '<div class="house">' +
-        '<img class="roof" src="' + IMG + 'roof.svg" alt="" aria-hidden="true">' +
-        '<div class="doorway">' +
-          '<div class="door door-l"><img src="' + IMG + 'door.svg" alt="" aria-hidden="true"></div>' +
-          '<div class="door door-r"><img src="' + IMG + 'door.svg" alt="" aria-hidden="true"></div>' +
-          '<div class="plaque">' +
-            '<div class="plaque-couple" id="opening-couple"></div>' +
-            '<p class="opening-initials" aria-hidden="true">A <span>❀</span> S</p>' +
-            '<p class="opening-names">Anusha &amp; Saurav</p>' +
-            '<p class="opening-line">You are cordially invited</p>' +
-            '<button type="button" class="btn btn-primary" id="open-invitation">Open Invitation</button>' +
-          "</div>" +
-        "</div>" +
-        lampHtml("lamp-open lamp-l") + lampHtml("lamp-open lamp-r") +
-      "</div>" +
-      '<button type="button" class="skip" id="skip-opening" hidden>Skip</button>';
-
-    opening.hidden = false;
-    document.body.classList.add("is-locked");
+    var root = document.documentElement;
+    if (!root.classList.contains("has-cover")) { opening.remove(); return; }
     loadLamps(opening, false);
 
     var btn = document.getElementById("open-invitation");
@@ -438,9 +418,8 @@
       finished = true;
       timers.forEach(clearTimeout);
       try { sessionStorage.setItem("as-opened", "1"); } catch (e) {}
-      opening.hidden = true;
-      opening.innerHTML = "";
-      document.body.classList.remove("is-locked");
+      opening.remove();
+      root.classList.remove("has-cover");
       document.removeEventListener("keydown", onKey);
       document.getElementById("app").focus({ preventScroll: true });
       document.dispatchEvent(new CustomEvent("invitation:opened"));
@@ -488,8 +467,13 @@
       var end = document.createElement("div"); end.className = "page-end"; end.setAttribute("aria-hidden", "true");
       app.parentNode.insertBefore(end, app.nextSibling);
     }
+    // The cover's painting is in the HTML; follow the data if it names a different one.
     var oc = document.getElementById("opening-couple");
-    if (oc && !oc.firstChild) oc.innerHTML = coupleImg(d.images.namaste, "couple-opening", "Bride and groom with folded hands");
+    if (oc && d.images.namaste) {
+      var ocImg = oc.querySelector("img");
+      if (!ocImg) oc.innerHTML = coupleImg(d.images.namaste, "couple-opening", "Bride and groom with folded hands");
+      else if (ocImg.getAttribute("src") !== asset(d.images.namaste)) { ocImg.removeAttribute("width"); ocImg.removeAttribute("height"); ocImg.src = asset(d.images.namaste); }
+    }
     loadLamps(app, true);
     startCountdown(d);
     revealIfExists();
