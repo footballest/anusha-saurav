@@ -1,0 +1,32 @@
+<!doctype html>
+<!--
+  PRINT LAYOUT — one A5 portrait page, used only to make the PDFs (scripts/make-pdf.mjs).
+  ?v=full       → wedding + reception   → assets/pdf/Anusha-Saurav-Wedding-Invitation.pdf
+  ?v=reception  → reception only        → assets/pdf/Anusha-Saurav-Reception-Invitation.pdf
+  Not linked from the site.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  <title>Anusha &amp; Saurav · Invitation (print)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Manjari:wght@400;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/print.css">
+  <script>
+    document.documentElement.setAttribute("data-theme", "green");
+    window.VARIANT = new URLSearchParams(location.search).get("v") === "reception" ? "reception" : "full";
+    window.ROOT = "../";
+  </script>
+  <script src="../assets/js/config.js" defer></script>
+  <script src="../assets/js/data.js" defer></script>
+  <script src="../assets/js/print.js" defer></script>
+</head>
+<body class="print-page">
+  <main class="sheet" id="sheet"></main>
+</body>
+</html>
