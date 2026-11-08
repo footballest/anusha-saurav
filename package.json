@@ -3,6 +3,14 @@
   "private": true,
   "description": "Anusha & Saurav · Kerala wedding invitation (static site for GitHub Pages)",
   "scripts": {
-    "serve": "python3 -m http.server 8080"
+    "serve": "python3 -m http.server 8080",
+    "qr": "node scripts/make-qr.mjs",
+    "og": "node scripts/make-og.mjs",
+    "pdf": "node scripts/make-pdf.mjs",
+    "assets": "npm run qr && npm run og && npm run pdf"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.0",
+    "qrcode": "^1.5.4"
   }
 }
