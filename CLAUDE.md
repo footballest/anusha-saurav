@@ -515,7 +515,8 @@ https://github.com/footballest/anusha-saurav created and pushed; Pages serves `m
 root (`.nojekyll`). Commits use footballest's GitHub no-reply email
 (`74678792+footballest@users.noreply.github.com`, set in this repo's git config); history
 was rewritten to it before the first push. Regenerate assets with `npm run assets`
-(needs Google Chrome installed). Still to check: WhatsApp previews on Saurav's phone.
+(needs Google Chrome installed). Saurav confirmed both live links and their WhatsApp
+previews on his phone (8 Nov 2026). ✅ Phase 6 done.
 
 **Phase 7 — After the wedding (later)**
 Turn on `gallery_enabled`, share the upload link + passcode with friends, approve
