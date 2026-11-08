@@ -379,6 +379,8 @@ Anusha-Saurav Wedding/
   via `https://drive.google.com/thumbnail?id=<ID>&sz=w1200` (and `sz=w400` for grids).
   Test this works; if Google blocks hotlinking, fall back to
   `https://lh3.googleusercontent.com/d/<ID>=w1200`.
+  *Tested 8 Nov 2026:* both addresses serve approved photos without any Google sign-in;
+  the site uses the thumbnail URL and falls back to lh3 automatically.
 - `POST` body `{type:"rsvp", ...}` → validate, append to RSVP, update Summary, optionally
   email Saurav (`MailApp`) a one-line notification.
 - `POST` body `{type:"upload", passcode, uploader, files:[{name, mime, base64}]}` →
@@ -491,6 +493,7 @@ Write `apps-script/Code.gs` and its README. Walk Saurav through deploying it. Pu
 URL in `config.js`. Test: config loads, RSVP rows appear, Summary counts are right,
 an upload lands in Pending, approval moves it, gallery shows it.
 ✅ Checkpoint: Saurav confirms rows and files in his Sheet and Drive.
+*Done 8 Nov 2026:* deployed from Saurav's account; all of the above verified.
 
 **Phase 6 — Assets and deploy**
 QR codes, OG images, PDFs. Then, with Saurav's go-ahead: create the GitHub repo
