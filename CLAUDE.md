@@ -32,7 +32,7 @@ Plus two unlisted pages:
 
 | Page | URL path | Purpose |
 |---|---|---|
-| Photo upload | `/upload/` | Passcode-protected upload for close friends; never linked from the site |
+| Photo upload | `/upload/` | Upload for close friends (no passcode); never linked from the site |
 | Print | `/print/` | Print-optimised layout used only to generate the PDFs |
 
 Backend: a **Google Sheet + Google Apps Script web app** owned by Saurav's Google
@@ -51,7 +51,7 @@ account. It (a) serves editable site details as JSON, (b) receives RSVPs,
 - No third-party trackers or analytics. Do not use api.qrserver.com or similar —
   generate QR codes locally.
 - Respect `prefers-reduced-motion`.
-- **Never** commit secrets (upload passcode) or personal reference photos. Personal
+- **Never** commit secrets or personal reference photos. Personal
   photos live in `reference/` which is in `.gitignore`.
 - Ask Saurav before: creating the GitHub repo, pushing, enabling Pages, or anything
   irreversible.
@@ -252,7 +252,7 @@ Music) but music stays off unless they press play.
 ├── CLAUDE.md
 ├── index.html                 # Full version (default, main link)
 ├── reception/index.html       # Reception-only version
-├── upload/index.html          # Passcode upload page (unlisted, noindex)
+├── upload/index.html          # Photo upload page (unlisted, noindex, no passcode)
 ├── print/index.html           # Print layout, ?v=full|reception (makes the PDFs)
 ├── print/og.html              # 1200×630 preview-image template (makes og-*.jpg)
 ├── robots.txt
@@ -340,7 +340,7 @@ function that he runs once to create everything below.
 
 ### Sheet tabs
 1. **Settings** (key | value | note) — public via the API. Keys at minimum:
-   `couple_short`, `gallery_enabled` (FALSE), `rsvp_open` (TRUE), `music_enabled`
+   `couple_short`, `gallery_enabled` (FALSE), `rsvp_open` (TRUE), `uploads_open` (TRUE), `music_enabled`
    (TRUE), `show_addresses` (FALSE), `notify_email_on_rsvp` (TRUE), `rsvp_whatsapp` (number for the WhatsApp fallback; Saurav),
    `reception_intro`, `reception_greeting`, `full_intro`, `sharing_the_happiness`.
 2. **Events** — id | name_en | name_ml | date_label | time_label | start_iso | end_iso | venue |
@@ -385,16 +385,19 @@ Anusha-Saurav Wedding/
   the site uses the thumbnail URL and falls back to lh3 automatically.
 - `POST` body `{type:"rsvp", ...}` → validate, append to RSVP, update Summary, optionally
   email Saurav (`MailApp`) a one-line notification.
-- `POST` body `{type:"upload", passcode, uploader, files:[{name, mime, base64}]}` →
-  check passcode against Script Property `UPLOAD_PASSCODE`; accept only
+- `POST` body `{type:"upload", uploader, files:[{name, mime, base64}]}` → accept only
   `image/jpeg|png|webp|heic`; max 10 files per request; save to **Pending uploads** as
   `<date>_<uploader>_<original>`; log to Uploads tab.
+  *Decision (9 Nov 2026):* **no passcode** (Saurav's decision). Safety
+  nets instead: setting `uploads_open` (FALSE → `closed`; a missing row means open), a
+  hidden honeypot field `website`, and at most `DAILY_UPLOAD_MB` (2000) of photos per day
+  from everyone together (`daily_limit`; running total in Script property
+  `UPLOAD_BYTES_<date>`). Photos still need approval before the gallery shows them.
 - Always return JSON via `ContentService` with `{ok:true}` / `{ok:false,error}`.
-  Error codes the site relies on: `bad_passcode` (upload page asks again), `closed`.
-  20 wrong passcodes within 10 minutes pause uploads (`too_many_attempts`).
+  Error codes the site relies on: `closed` (RSVP and upload), `daily_limit` (upload).
 - RSVP rows store `Accept/Decline` and `Yes/No`; guest-typed text is written with a
   leading apostrophe, so Sheets never treats it as a formula or number.
-- Never return the RSVP, Summary or Uploads tabs, the passcode, or folder IDs.
+- Never return the RSVP, Summary or Uploads tabs, upload totals, or folder IDs.
 
 Add a custom menu in the Sheet: **Wedding site → Refresh site cache / Rebuild summary /
 Approve selected uploads** (the last moves files listed in selected Uploads rows from
@@ -402,8 +405,7 @@ Pending into a chosen Approved subfolder and sets status = approved).
 
 `apps-script/README.md` must give Saurav click-by-click steps: open Sheet → Extensions
 → Apps Script → paste → run `setup` → handle the "Google hasn't verified this app"
-screen (Advanced → Go to project) → set `UPLOAD_PASSCODE` in Project Settings → Script
-properties → Deploy → New deployment → Web app → copy URL → paste into
+screen (Advanced → Go to project) → Deploy → New deployment → Web app → copy URL → paste into
 `assets/js/config.js`. Also: how to redeploy after code changes (Manage deployments →
 Edit → New version, keeping the same URL).
 
@@ -413,7 +415,8 @@ Edit → New version, keeping the same URL).
 
 - Not linked anywhere on the site. noindex.
 - Same Kerala styling, simpler layout: "Share your photos with Anusha & Saurav".
-- Fields: your name, passcode, file picker (multiple, images only).
+- Fields: your name, file picker (multiple, images only). No passcode (9 Nov 2026).
+- When `uploads_open` is FALSE, show a polite "paused" note instead of the form.
 - Before upload, resize in the browser to max 2560px on the long edge, JPEG quality
   0.85, so files stay small; show per-file progress; upload in batches of 3.
 - Clear message: "Photos are reviewed by the couple before appearing in the gallery."
@@ -519,7 +522,7 @@ was rewritten to it before the first push. Regenerate assets with `npm run asset
 previews on his phone (8 Nov 2026). ✅ Phase 6 done.
 
 **Phase 7 — After the wedding (later)**
-Turn on `gallery_enabled`, share the upload link + passcode with friends, approve
+Turn on `gallery_enabled`, share the upload link with friends, approve
 photos, optionally add a thank-you message to both versions.
 
 ---

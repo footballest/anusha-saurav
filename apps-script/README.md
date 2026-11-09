@@ -46,38 +46,25 @@ Nothing here costs money. Everything stays in your Google account.
     - in Google Drive, a folder **Anusha-Saurav Wedding**, containing *Pending uploads*
       and *Approved* (which holds *Save the Date*, *Wedding* and *Reception*)
 
-## Part C · Choose the photo upload passcode
+## Part C · Publish it as a web app
 
-This is the code your friends type on the upload page. It is stored only inside Google,
-never in the website code.
-
-13. In the script editor, click the **⚙ gear (Project Settings)** in the left sidebar.
-14. Scroll to the bottom to **Script properties** and click **Add script property**.
-15. Property: `UPLOAD_PASSCODE`. Value: a word or short phrase you'll share with close
-    friends (for example something like `mullappoo2026`, but choose your own).
-16. Click **Save script properties**.
-
-To change the passcode later, edit it in the same place. No redeploy is needed.
-
-## Part D · Publish it as a web app
-
-17. In the script editor, click the blue **Deploy** button (top-right), then
+13. In the script editor, click the blue **Deploy** button (top-right), then
     **New deployment**.
-18. Next to **Select type**, click the **⚙ gear** and choose **Web app**.
-19. Fill in:
+14. Next to **Select type**, click the **⚙ gear** and choose **Web app**.
+15. Fill in:
     - **Description:** `v1`
     - **Execute as:** **Me** (your email)
     - **Who has access:** **Anyone**. Not "Anyone with Google account": guests won't be
       signed in.
-20. Click **Deploy**. If it asks for authorization again, repeat step 10.
-21. Copy the **Web app URL**. It looks like
+16. Click **Deploy**. If it asks for authorization again, repeat step 10.
+17. Copy the **Web app URL**. It looks like
     `https://script.google.com/macros/s/AKfycb…/exec`.
-22. Put it in `assets/js/config.js`:
+18. Put it in `assets/js/config.js`:
     ```js
     window.API_URL = "https://script.google.com/macros/s/AKfycb…/exec";
     ```
     Or send it to Claude to do. The URL isn't secret: it ends up in the public website
-    code anyway. The passcode is what protects uploads.
+    code anyway.
 
 **Quick check:** open the Web app URL with `?action=config` added at the end in a
 browser. You should see text starting with `{"ok":true,"settings":{…`.
@@ -107,6 +94,7 @@ The URL stays the same, so nothing on the website needs to change.
   typed).
 - Useful switches in **Settings** (type `TRUE` or `FALSE`):
   - `rsvp_open`: FALSE closes the RSVP form
+  - `uploads_open`: FALSE pauses the photo upload page (if the row is missing, uploads are open)
   - `gallery_enabled`: TRUE shows the photo gallery (after the wedding)
   - `music_enabled`: FALSE hides the music button
   - `notify_email_on_rsvp`: FALSE stops the RSVP emails
@@ -126,9 +114,12 @@ The URL stays the same, so nothing on the website needs to change.
 - To delete test rows: delete them in **RSVP**, then **Wedding site → Rebuild summary**.
 
 ### Photos from friends
-1. Share the upload page link (`…/upload/`) and the passcode with close friends.
+1. Share the upload page link (`…/upload/`) with close friends. There is no passcode:
+   anyone who has the link can send photos, so share it only where you'd be happy for it
+   to be forwarded.
 2. Their photos land in Drive → *Anusha-Saurav Wedding* → **Pending uploads**, and a row
-   appears in the **Uploads** tab. Nothing is public yet.
+   appears in the **Uploads** tab. Nothing is public yet: a photo reaches the gallery only
+   after you approve it (next step).
 3. To approve, open the **Uploads** tab and select the rows. Hold Cmd to pick several.
    Then choose **Wedding site → Approve selected uploads**, type **1** (Save the Date),
    **2** (Wedding) or **3** (Reception), and click OK. The photos move to that album
@@ -138,6 +129,13 @@ The URL stays the same, so nothing on the website needs to change.
    Date* in Drive, then run **Wedding site → Refresh site cache**. This also makes them
    viewable.
 6. When you're ready, set `gallery_enabled` to `TRUE` in Settings.
+7. To stop uploads (for example once you have enough photos, or if the link spreads too
+   far), set `uploads_open` to `FALSE` in Settings. The upload page then shows a polite
+   "paused" note.
+8. As a safety net, the script accepts at most **2 GB of photos per day** from everyone
+   together (about 1,500–2,000 phone photos). After that the page asks people to try
+   again the next day. To change it, edit `DAILY_UPLOAD_MB` near the top of `Code.gs` and
+   redeploy.
 
 ---
 
@@ -146,7 +144,8 @@ The URL stays the same, so nothing on the website needs to change.
 | What you see | What to do |
 |---|---|
 | The site shows "Online RSVP isn't available right now" | Check `config.js` has the URL. Open the URL + `?action=config` in a browser; if it asks you to sign in, the deployment's "Who has access" isn't **Anyone**. Redeploy with that fixed. |
-| Upload page: "That passcode didn't work" | Check `UPLOAD_PASSCODE` in Project Settings → Script properties (spaces at the ends are ignored). After 20 wrong tries in 10 minutes, uploads pause for 10 minutes. |
+| Upload page: "Photo uploads are paused" | `uploads_open` is FALSE in Settings. Set it to TRUE. |
+| Upload page: "uploads are resting until tomorrow" | Today's 2 GB limit was reached. It resets at midnight (India time), or raise `DAILY_UPLOAD_MB` in `Code.gs` and redeploy. |
 | The menu **Wedding site** is missing | Reload the Sheet. |
 | A change to the code doesn't show up | Redeploy with **New version** (see above). |
 | No RSVP emails | Check `notify_email_on_rsvp` is TRUE. Google allows about 100 emails a day on a free account. |

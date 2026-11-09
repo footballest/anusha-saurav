@@ -1,6 +1,7 @@
 // Photo upload page (/upload/). Photos are resized in the browser (max 2560 px on the
-// long edge, JPEG 0.85) and sent in batches of 3 to the Apps Script web app, which checks
-// the passcode and saves them to the private "Pending uploads" Drive folder.
+// long edge, JPEG 0.85) and sent in batches of 3 to the Apps Script web app, which saves
+// them to the private "Pending uploads" Drive folder. No passcode: photos appear in the
+// gallery only after the couple approves them.
 (function () {
   "use strict";
 
@@ -10,7 +11,7 @@
   var OK_TYPES = /^image\/(jpeg|png|webp|heic|heif)$/;
 
   var items = [];   // {id, file, li, state: ready|skipped|working|done|failed}
-  var busy = false, uid = 0;
+  var busy = false, uid = 0, stopNote = "";
 
   var form = document.getElementById("upload-form");
   var input = form.elements.photos;
@@ -30,9 +31,16 @@
     return m ? "image/" + m[1].toLowerCase() : "";
   }
 
+  // Uploads switched off in the Sheet (Settings → uploads_open = FALSE): show a note instead.
+  function pause(on) {
+    document.getElementById("upload-paused").hidden = !on;
+    form.hidden = on;
+  }
+
   // ---------- page dressing from the shared data (theme + namaste illustration) ----------
   if (window.loadSiteData) {
     window.loadSiteData(function (d) {
+      if (!busy) pause(d.settings.uploads_open === false);
       var t = d.settings.theme;
       if (!document.documentElement.hasAttribute("data-theme-locked") && /^(green|kasavu|lotus|maroon)$/.test(t || "")) {
         document.documentElement.setAttribute("data-theme", t);
@@ -188,7 +196,13 @@
     if (el && el.setAttribute) el.setAttribute("aria-invalid", String(!!msg));
   }
 
-  function runBatches(uploader, passcode) {
+  // Errors that stop the whole queue (nothing else will get through either).
+  var STOP = {
+    closed: "Photo uploads are paused right now. Your photos are still here; please try again a little later.",
+    daily_limit: "We’ve received a lot of photos today, so uploads are resting until tomorrow. Please try again then."
+  };
+
+  function runBatches(uploader, website) {
     var queue = items.filter(function (it) { return it.state === "ready" || it.state === "failed"; });
     var stopped = false;
 
@@ -216,8 +230,8 @@
         prepared.forEach(function (x) { setItem(x.it, "working", "Uploading…", 70); x.it.li.classList.add("is-sending"); });
         return post({
           type: "upload",
-          passcode: passcode,
           uploader: uploader,
+          website: website,
           files: prepared.map(function (x) { return { name: x.f.name, mime: x.f.mime, base64: x.f.base64 }; })
         }).then(function (j) {
           if (j && j.ok) {
@@ -225,13 +239,12 @@
             refresh();
             return next();
           }
-          var bad = j && /passcode/i.test(j.error || "");
-          prepared.forEach(function (x) { setItem(x.it, bad ? "ready" : "failed", bad ? "Not sent" : "Couldn’t upload", 0); });
-          if (bad) {
+          var stop = j && STOP[j.error];
+          prepared.forEach(function (x) { setItem(x.it, stop ? "ready" : "failed", stop ? "Not sent" : "Couldn’t upload", 0); });
+          if (stop) {
             stopped = true;
-            queue.forEach(function (it) { setItem(it, "ready", "Ready", 0); });
-            showError("passcode", "That passcode didn’t work. Please check it and try again.");
-            form.elements.passcode.focus();
+            queue.forEach(function (it) { setItem(it, "ready", "Not sent", 0); });
+            stopNote = stop;
             return;
           }
           refresh();
@@ -251,10 +264,8 @@
     if (busy) return;
     status.innerHTML = "";
     var uploader = form.elements.uploader.value.trim();
-    var passcode = form.elements.passcode.value.trim();
     var todo = items.filter(function (it) { return it.state === "ready" || it.state === "failed"; });
     showError("uploader", uploader.length < 2 ? "Please tell us your name." : "");
-    showError("passcode", passcode ? "" : "Please enter the passcode.");
     showError("photos", todo.length ? "" : "Please choose at least one photo.");
     var firstBad = form.querySelector('[aria-invalid="true"]');
     if (firstBad) { firstBad.focus(); return; }
@@ -264,13 +275,16 @@
     busy = true;
     refresh();
     items.forEach(function (it) { var rm = it.li.querySelector(".file-remove"); if (rm) rm.hidden = true; });
-    runBatches(uploader, passcode).then(function () {
+    stopNote = "";
+    runBatches(uploader, form.elements.website.value).then(function () {
       busy = false;
       items.forEach(function (it) { setItem(it, it.state, it.li.querySelector(".file-status").textContent); });
       refresh();
       var done = items.filter(function (it) { return it.state === "done"; }).length;
       var failed = items.filter(function (it) { return it.state === "failed"; }).length;
-      if (!window.API_URL) {
+      if (stopNote) {
+        status.innerHTML = '<p class="form-note">' + (done ? done + (done === 1 ? " photo" : " photos") + " received. " : "") + esc(stopNote) + "</p>";
+      } else if (!window.API_URL) {
         status.innerHTML = '<p class="form-note">Uploading isn’t switched on yet. Please try again a little later.</p>';
       } else if (done && !failed && !items.some(function (it) { return it.state === "ready"; })) {
         status.innerHTML = '<p class="upload-thanks">Thank you! ' + done + (done === 1 ? " photo" : " photos") + " received.</p>";

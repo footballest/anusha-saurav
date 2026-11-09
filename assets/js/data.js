@@ -42,7 +42,7 @@
   // Normalise types (the Sheet sends everything as text) and sort, so the same content
   // from the Sheet and from fallback.json comes out identical.
   function normalise(d) {
-    ["gallery_enabled", "rsvp_open", "music_enabled", "show_addresses", "notify_email_on_rsvp"].forEach(function (k) {
+    ["gallery_enabled", "rsvp_open", "uploads_open", "music_enabled", "show_addresses", "notify_email_on_rsvp"].forEach(function (k) {
       d.settings[k] = toBool(d.settings[k]);
     });
     d.events.forEach(function (e) { e.order = Number(e.order) || 0; });

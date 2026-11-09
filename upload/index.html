@@ -1,8 +1,10 @@
 <!doctype html>
 <!--
   PHOTO UPLOAD — unlisted page for close friends. Never link to it from the site.
-  Guests need a passcode, which is checked by the Google Apps Script backend
-  (Script property UPLOAD_PASSCODE). The passcode is never stored in this repository.
+  No passcode (decision 9 Nov 2026): anyone with the link can send photos, but they land
+  in the private "Pending uploads" Drive folder and appear only after Saurav approves them.
+  The Sheet's Settings tab can pause uploads (uploads_open = FALSE), and the Apps Script
+  caps how much can be uploaded per day.
 -->
 <html lang="en">
 <head>
@@ -55,15 +57,13 @@
     </header>
 
     <section class="section upload-section" aria-label="Upload photos">
+      <p class="form-note upload-paused" id="upload-paused" hidden>Photo uploads are paused right now. Please check back a little later.</p>
       <form id="upload-form" class="rsvp-form upload-form" novalidate>
         <label class="field">Your name <span aria-hidden="true">*</span>
           <input type="text" name="uploader" required maxlength="60" autocomplete="name" aria-describedby="err-uploader"></label>
         <p class="field-error" id="err-uploader" hidden></p>
 
-        <label class="field">Passcode <span aria-hidden="true">*</span>
-          <input type="password" name="passcode" required maxlength="60" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="err-passcode passcode-help"></label>
-        <p class="form-help" id="passcode-help">The passcode is in the message that shared this page with you.</p>
-        <p class="field-error" id="err-passcode" hidden></p>
+        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
         <div class="field">
           <span>Photos</span>

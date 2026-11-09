@@ -9,9 +9,10 @@
  *        (the reception variant only ever gets reception events)
  *   GET  ?action=gallery                        → { "Save the Date": [{id}], "Wedding": [...], "Reception": [...] }
  *   POST {type:"rsvp", ...}                     → appended to the RSVP tab, Summary rebuilt, optional email
- *   POST {type:"upload", passcode, uploader, files:[{name, mime, base64}]} → saved to Drive "Pending uploads"
+ *   POST {type:"upload", uploader, files:[{name, mime, base64}]}  → saved to Drive "Pending uploads"
+ *        (no passcode; paused when Settings uploads_open = FALSE; capped at DAILY_UPLOAD_MB per day)
  *
- * Never returned to anyone: the RSVP, Summary and Uploads tabs, the passcode, folder IDs.
+ * Never returned to anyone: the RSVP, Summary and Uploads tabs, folder IDs.
  * Every response is JSON: {ok:true, ...} or {ok:false, error:"<code>"}.
  */
 
@@ -44,7 +45,7 @@ var ROOT_FOLDER_NAME = 'Anusha-Saurav Wedding';
 var OK_MIME = /^image\/(jpeg|png|webp|heic|heif)$/;
 var MAX_FILES = 10;
 var MAX_FILE_BYTES = 20 * 1024 * 1024;
-var MAX_PASSCODE_FAILS = 20;              // per 10 minutes, across everyone
+var DAILY_UPLOAD_MB = 2000;               // all uploads together, per day (IST); change here and redeploy
 var FOOD = ['Veg', 'Non-veg', 'No preference'];
 
 // Starting content for the public tabs (copied from data/fallback.json). After setup()
@@ -59,6 +60,7 @@ var SEED = {
     ["invocation", "॥ ശ്രീ മഹാഗണപതയേ നമഃ ॥", "Malayalam line at the very top"],
     ["gallery_enabled", "FALSE", "TRUE shows the photo gallery (after the wedding)"],
     ["rsvp_open", "TRUE", "FALSE closes the RSVP form with a polite note"],
+    ["uploads_open", "TRUE", "FALSE pauses the photo upload page"],
     ["music_enabled", "TRUE", "FALSE hides the music button"],
     ["show_addresses", "FALSE", "TRUE shows the house names under the parents"],
     ["notify_email_on_rsvp", "TRUE", "TRUE emails you a line for every RSVP"],
@@ -130,8 +132,7 @@ function setup() {
   clearAllCache_();
 
   var msg = 'Setup done. ' + (created.length ? 'Created tabs: ' + created.join(', ') + '. ' : 'All tabs already existed (left as they were). ') +
-    'Drive folder: "' + f.root.getName() + '". ' +
-    (PropertiesService.getScriptProperties().getProperty('UPLOAD_PASSCODE') ? 'Upload passcode is set.' : 'Next: set UPLOAD_PASSCODE in Project Settings → Script properties.');
+    'Drive folder: "' + f.root.getName() + '". Next: Deploy → New deployment → Web app.';
   console.log(msg);
   try { ss.toast(msg, 'Wedding site', 10); } catch (e) {}
   return msg;
@@ -429,18 +430,11 @@ function handleRsvp_(b) {
   return { ok: true };
 }
 
+// No passcode: anyone with the link can send photos. They go to the private
+// "Pending uploads" folder and reach the gallery only via "Approve selected uploads".
 function handleUpload_(b) {
-  var props = PropertiesService.getScriptProperties();
-  var code = props.getProperty('UPLOAD_PASSCODE');
-  if (!code) return { ok: false, error: 'uploads_closed' };
-
-  var cache = CacheService.getScriptCache();
-  var fails = Number(cache.get('upload_fails') || 0);
-  if (fails >= MAX_PASSCODE_FAILS) return { ok: false, error: 'too_many_attempts' };
-  if (String(b.passcode || '').trim() !== String(code).trim()) {
-    cache.put('upload_fails', String(fails + 1), 600);
-    return { ok: false, error: 'bad_passcode' };
-  }
+  if (b.website) return { ok: true, saved: 0, skipped: 0 };   // honeypot filled in: a bot. Pretend it worked.
+  if (!isTrue_(setting_('uploads_open', 'TRUE'))) return { ok: false, error: 'closed' };
 
   var uploader = clean_(b.uploader, 60);
   if (uploader.length < 2) return { ok: false, error: 'name_required' };
@@ -448,27 +442,52 @@ function handleUpload_(b) {
   if (!files.length) return { ok: false, error: 'no_files' };
   if (files.length > MAX_FILES) return { ok: false, error: 'too_many_files' };
 
-  var pending = folder_('pending');
-  var log = SpreadsheetApp.getActive().getSheetByName(TAB.uploads);
-  var stamp = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd_HHmm');
-  var who = safeName_(uploader, 40).replace(/\s+/g, '-');
-  var saved = 0, skipped = 0;
-
+  // Check every file first, so the daily allowance counts only real photos.
+  var good = [], skipped = 0;
   files.forEach(function (f) {
     var mime = String((f && f.mime) || '').toLowerCase();
     if (!OK_MIME.test(mime) || !f.base64) { skipped++; return; }
     var bytes;
     try { bytes = Utilities.base64Decode(String(f.base64)); } catch (err) { skipped++; return; }
     if (!bytes.length || bytes.length > MAX_FILE_BYTES) { skipped++; return; }
-    var original = safeName_(f.name || 'photo', 80) || 'photo';
-    var fileName = stamp + '_' + who + '_' + original;
-    var file = pending.createFile(Utilities.newBlob(bytes, mime, fileName));
-    log.appendRow([new Date(), text_(uploader), text_(fileName), file.getId(), 'pending']);
-    saved++;
+    good.push({ mime: mime, bytes: bytes, name: f.name });
   });
+  if (!good.length) return { ok: false, error: 'no_valid_photos' };
 
-  if (!saved) return { ok: false, error: 'no_valid_photos' };
-  return { ok: true, saved: saved, skipped: skipped };
+  var size = good.reduce(function (n, g) { return n + g.bytes.length; }, 0);
+  if (!takeDailyAllowance_(size)) return { ok: false, error: 'daily_limit' };
+
+  var pending = folder_('pending');
+  var log = SpreadsheetApp.getActive().getSheetByName(TAB.uploads);
+  var stamp = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd_HHmm');
+  var who = safeName_(uploader, 40).replace(/\s+/g, '-');
+  good.forEach(function (g) {
+    var original = safeName_(g.name || 'photo', 80) || 'photo';
+    var fileName = stamp + '_' + who + '_' + original;
+    var file = pending.createFile(Utilities.newBlob(g.bytes, g.mime, fileName));
+    log.appendRow([new Date(), text_(uploader), text_(fileName), file.getId(), 'pending']);
+  });
+  return { ok: true, saved: good.length, skipped: skipped };
+}
+
+// Keeps a running total of today's uploads (Script property UPLOAD_BYTES_<date>) so a
+// forwarded link can't fill your Drive. Returns false once today's DAILY_UPLOAD_MB is used up.
+function takeDailyAllowance_(bytes) {
+  var props = PropertiesService.getScriptProperties();
+  var key = 'UPLOAD_BYTES_' + Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd');
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var used = Number(props.getProperty(key) || 0);
+    if (used + bytes > DAILY_UPLOAD_MB * 1024 * 1024) return false;
+    props.setProperty(key, String(used + bytes));
+    props.getKeys().forEach(function (k) {   // forget earlier days
+      if (k.indexOf('UPLOAD_BYTES_') === 0 && k !== key) props.deleteProperty(k);
+    });
+    return true;
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 
